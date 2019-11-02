@@ -1,0 +1,21 @@
+{
+  "name": "hugo-component-matomo",
+  "version": "0.1.0",
+  "description": "Adds Matomo user tracking and optout scripts to Hugo",
+  "repository": "https://github.com/holehan/hugo-component-matomo.git",
+  "author": "Florian Grässle <hallo@holehan.org>",
+  "license": "MIT",
+  "browserslist": [
+    ">1%"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src/js -d assets/js && cp node_modules/fetch-jsonp/build/fetch-jsonp.js assets/js && cp node_modules/es6-promise/dist/es6-promise.auto.min.js assets/js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "es6-promise": "^4.2.4",
+    "fetch-jsonp": "^1.1.3"
+  }
+}
