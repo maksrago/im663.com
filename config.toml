@@ -145,11 +145,11 @@ copyright = ""            # default: author.name ↓
     options = ""            # default: "{theme: 'simple'}"
 
   [params.social]
-    a-email = "mailto:your@email.com"
+    a-email = "mailto:admin@16chan.xyz"
     # b-stack-overflow = "http://localhost:1313"
-    c-twitter = "http://localhost:1313"
+    c-twitter = "https://twitter.com/16chanxyz"
     # d-facebook = "http://localhost:1313"
-    e-linkedin = "http://localhost:1313"
+    # e-linkedin = "http://localhost:1313"
     # f-google = "http://localhost:1313"
     g-github = "https://github.com/maksrago"
     # h-weibo = "http://localhost:1313"
@@ -157,7 +157,7 @@ copyright = ""            # default: author.name ↓
     # j-douban = "http://localhost:1313"
     # k-pocket = "http://localhost:1313"
     # l-tumblr = "http://localhost:1313"
-    m-instagram = "http://localhost:1313"
+    # m-instagram = "http://localhost:1313"
     n-gitlab = "https://gitgud.io/663"
 
 [params.matomo]

@@ -8,7 +8,7 @@
 ** How to setup LynxChan 2.2.x with Ubuntu 18.04 :@guides:ubuntu:nginx:lynxchan:
    :PROPERTIES:
    :EXPORT_FILE_NAME: lynxchan-setup-guide
-   :EXPORT_DATE: <2019-10-24 Thu>
+   :EXPORT_DATE: <2019-11-02 Sat>
    :END:
    This is a comprehensive guide on setting up the [[https://www.gitgud.io/LynxChan/LynxChan][LynxChan]] imageboard
    engine for the absolute layman, along with various additional

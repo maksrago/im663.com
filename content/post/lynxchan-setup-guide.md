@@ -1,6 +1,6 @@
 +++
 title = "How to setup LynxChan 2.2.x with Ubuntu 18.04"
-date = 2019-10-24T00:00:00-04:00
+date = 2019-11-02T00:00:00-04:00
 tags = ["ubuntu", "nginx", "lynxchan"]
 categories = ["guides"]
 draft = false
