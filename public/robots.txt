@@ -1,2 +1,0 @@
-User-agent: *
-Sitemap: https://im663.com/sitemap.xml
