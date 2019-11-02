@@ -4,7 +4,6 @@
 * Posts
   :PROPERTIES:
   :EXPORT_HUGO_SECTION: post
-  :EXPORT_FILE_NAME: index.html
   :END:
 
 ** TODO How to setup LynxChan 2.2.x with Ubuntu 18.04 :@guides:ubuntu:nginx:lynxchan:

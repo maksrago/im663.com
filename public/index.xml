@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>I&#39;m 663</title>
+    <link>https://im663.com/</link>
+    <description>Recent content on I&#39;m 663</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 24 Oct 2019 00:00:00 -0400</lastBuildDate>
+    
+	<atom:link href="https://im663.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Project 2</title>
+      <link>https://im663.com/projects/project2/</link>
+      <pubDate>Thu, 24 Oct 2019 00:00:00 -0400</pubDate>
+      
+      <guid>https://im663.com/projects/project2/</guid>
+      <description>YAS</description>
+    </item>
+    
+    <item>
+      <title>16chan-fe</title>
+      <link>https://im663.com/projects/16chan-fe/</link>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 -0400</pubDate>
+      
+      <guid>https://im663.com/projects/16chan-fe/</guid>
+      <description>Placeholder</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://im663.com/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://im663.com/about/</guid>
+      <description>I&amp;rsquo;m 663, and this is my blog. This site was created in an attempt to aggregate my personal thoughts, interests, and useful information (such as technical guides). I&amp;rsquo;ve gone by many aliases online, the most widely known being 663, the alias that I use as the head administrator and owner of 16chan. Currently I&amp;rsquo;m in the final year of my Computer Science program.
+If you&amp;rsquo;re interested in getting in contact with me, or would like me to answer any questions regarding content on this site you can send me an email at admin@16chan.</description>
+    </item>
+    
+  </channel>
+</rss>

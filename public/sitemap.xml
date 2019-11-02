@@ -1,0 +1,58 @@
+<?xml-stylesheet type="text/xsl" href="https://im663.com/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://im663.com/categories/</loc>
+    <lastmod>2019-10-24T00:00:00-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://im663.com/</loc>
+    <lastmod>2019-10-24T00:00:00-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://im663.com/projects/</loc>
+    <lastmod>2019-10-24T00:00:00-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://im663.com/categories/personal-projects/</loc>
+    <lastmod>2019-10-24T00:00:00-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://im663.com/projects/project2/</loc>
+    <lastmod>2019-10-24T00:00:00-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://im663.com/projects/16chan-fe/</loc>
+    <lastmod>2019-09-15T00:00:00-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://im663.com/about/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://im663.com/tags/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>
