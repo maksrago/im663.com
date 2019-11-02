@@ -1,6 +1,6 @@
 +++
 title = "How to setup LynxChan 2.2.x with Ubuntu 18.04"
-date = 2019-10-24T00:00:00-04:00
+date = 2019-10-24T00:00:00+00:00
 tags = ["ubuntu", "nginx", "lynxchan"]
 categories = ["guides"]
 draft = true
@@ -37,7 +37,7 @@ different domain registrar or VPS.
         several users.
     -   Banning a single user can cause multiple users to get banned.
 
-If you plan on using a [CDN](https://en.wikipedia.org/wiki/Content%5Fdelivery%5Fnetwork) or some sort of DDoS mitigation service,
+If you plan on using a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) or some sort of DDoS mitigation service,
 you might want to find an alternative, I haven't tested any others
 thus far.
 
@@ -68,7 +68,7 @@ Upon purchasing your domain, you  will be able to modify various
 settings in your **Dashboard**. From there you will want to click
 the **Manage** button.
 
-{{< figure src="https://i.imgur.com/bKmGoFb.png" >}}
+{{<figure src="https://i.imgur.com/bKmGoFb.png">}}
 
 Under the **Nameservers** section we need to select the dropdown,
 and select **Custom DNS**. We are going to need to input the
@@ -78,7 +78,7 @@ following three nameservers for DigitalOcean:
 -   `ns2.digitalocean.com`
 -   `ns3.digitalocean.com`
 
-{{< figure src="https://i.imgur.com/mtKTxP3.png" >}}
+{{<figure src="https://i.imgur.com/mtKTxP3.png">}}
 
 
 ## Getting a VPS {#getting-a-vps}
@@ -95,23 +95,23 @@ free credit for your first month.
 Upon creating and confirming your new account, we are going to
 create a new Droplet.
 
-{{< figure src="https://i.imgur.com/WJvJSWj.png" >}}
+{{<figure src="https://i.imgur.com/WJvJSWj.png">}}
 
 These are the settings that I used, and the $5 a month tier should
 suffice for a small imageboard. The only setting that matters here
 is that we use Ubuntu 18.04.
 
-{{< figure src="https://i.imgur.com/wIQIRYS.png" >}}
+{{<figure src="https://i.imgur.com/wIQIRYS.png">}}
 
 You can select the server location that works best for you.
 
-{{< figure src="https://i.imgur.com/ZytJ1OU.png" >}}
+{{<figure src="https://i.imgur.com/ZytJ1OU.png">}}
 
 Finally, I highly recommend enabling automatic backups, just in
 case MongoDB breaks (which it can occasionaly). However, it is
 optional.
 
-{{< figure src="https://i.imgur.com/1osqIrp.png" >}}
+{{<figure src="https://i.imgur.com/1osqIrp.png">}}
 
 
 ### SSHing into our VPS {#sshing-into-our-vps}
@@ -119,21 +119,21 @@ optional.
 It will take a moment to create our droplet, but after it's done
 we can enter our control panel.
 
-{{< figure src="https://i.imgur.com/0DfAYSP.png" >}}
+{{<figure src="https://i.imgur.com/0DfAYSP.png">}}
 
 The IP address listed in our droplet's control panel is the IP
 address we will put into our SSH client. We still, however, need
 to get the password for our VPS. From the control panel we can
 click on **Access** to request a password to be emailed to us.
 
-{{< figure src="https://i.imgur.com/LEKGFsv.png" >}}
+{{<figure src="https://i.imgur.com/LEKGFsv.png">}}
 
-{{< figure src="https://i.imgur.com/EBewlsb.png" >}}
+{{<figure src="https://i.imgur.com/EBewlsb.png">}}
 
 You should receive an email from DigitalOcean shortly with the
 droplets credentials.
 
-{{< figure src="https://i.imgur.com/CGfx4r9.png" >}}
+{{<figure src="https://i.imgur.com/CGfx4r9.png">}}
 
 Once we get our password we can finally SSH into our DigitalOcean
 droplet.
@@ -168,22 +168,22 @@ setup our DNS settings to work properly with the domain that we purchased.
 We are going to need to setup our DNS settings in DigitalOcean
 now.
 
-{{< figure src="https://i.imgur.com/6NVFaWY.png" >}}
+{{<figure src="https://i.imgur.com/6NVFaWY.png">}}
 
 Here we can add our domain that we purchased earlier.
 
-{{< figure src="https://i.imgur.com/FTiWD3x.png" >}}
+{{<figure src="https://i.imgur.com/FTiWD3x.png">}}
 
 Upon adding our domain, DigitalOcean will generate the `NS` records
 for us, we just need to add two records.
 
 We are going to add an `@` A record.
 
-{{< figure src="https://i.imgur.com/TRviOOf.png" >}}
+{{<figure src="https://i.imgur.com/TRviOOf.png">}}
 
 And we are going to add a `www` A record.
 
-{{< figure src="https://i.imgur.com/grGKsen.png" >}}
+{{<figure src="https://i.imgur.com/grGKsen.png">}}
 
 This will allow users to access our site from both typing
 yourdomain.com and www.yourdomain.com.

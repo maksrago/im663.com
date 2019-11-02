@@ -596,7 +596,7 @@
     - [[https://16chan.xyz/][16chan.xyz]]
     - [[https://imageboard.net/][imageboard.net]]
     - [[https://kinostream.gq/][kinostream.gq]]
-    - [[https://kinostream.gq/][im663.com]]
+    - [[https://im663.com/][im663.com]]
 
 
     View more of my projects [[https://github.com/maksrago][here]].

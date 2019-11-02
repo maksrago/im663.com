@@ -12,7 +12,7 @@ Currently I'm in the final year of my Computer Science program.
 
 If you're interested in getting in contact with me, or would like me
 to answer any questions regarding content on this site you can send me
-an email at [admin@16chan.xyz](mailto:admin@16chan.xyz).
+an email at [admin@16chan.xyz](admin@16chan.xyz).
 
 
 ## Useful Links {#useful-links}
@@ -26,7 +26,7 @@ an email at [admin@16chan.xyz](mailto:admin@16chan.xyz).
 -   [16chan.xyz](https://16chan.xyz/)
 -   [imageboard.net](https://imageboard.net/)
 -   [kinostream.gq](https://kinostream.gq/)
--   [im663.com](https://kinostream.gq/)
+-   [im663.com](https://im663.com/)
 
 View more of my projects [here](https://github.com/maksrago).
 
@@ -34,7 +34,7 @@ View more of my projects [here](https://github.com/maksrago).
 ## Frequently Asked Questions {#frequently-asked-questions}
 
 -   **_Why did you choose 663 as your alias?_**
--   I was introduced to the film director [Wong Kar-wai](https://en.wikipedia.org/wiki/Wong%5FKar-wai) and his 1994
+-   I was introduced to the film director [Wong Kar-wai](https://en.wikipedia.org/wiki/Wong_Kar-wai) and his 1994
     film _Chunking Express_ which really resonated
     with me. One of the characters from the film was called "Cop 663"
     and I really resonated with his character.
@@ -70,7 +70,7 @@ View more of my projects [here](https://github.com/maksrago).
 -   I don't think I can name one quintiscential film that I would
     choose as my all time favorite film, rather I can name a few of
     my favorites:
-    -   _[Chungking Express](https://en.wikipedia.org/wiki/Chungking%5FExpress)_ (1994)
-    -   _[Blind Chance](https://en.wikipedia.org/wiki/Blind%5FChance)_ (1987) (or _Przypadek_ in Polish)
-    -   _[Solaris](https://en.wikipedia.org/wiki/Solaris%5F(1972%5Ffilm))_ (1972)
-    -   _[The House That Jack Built](https://en.wikipedia.org/wiki/The%5FHouse%5FThat%5FJack%5FBuilt%5F(2018%5Ffilm))_ (2018)
+    -   _[Chungking Express](https://en.wikipedia.org/wiki/Chungking_Express)_ (1994)
+    -   _[Blind Chance](https://en.wikipedia.org/wiki/Blind_Chance)_ (1987) (or _Przypadek_ in Polish)
+    -   _[Solaris](https://en.wikipedia.org/wiki/Solaris_(1972_film))_ (1972)
+    -   _[The House That Jack Built](https://en.wikipedia.org/wiki/The_House_That_Jack_Built_(2018_film))_ (2018)
