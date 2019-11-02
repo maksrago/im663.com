@@ -5,8 +5,7 @@
   :PROPERTIES:
   :EXPORT_HUGO_SECTION: post
   :END:
-
-** TODO How to setup LynxChan 2.2.x with Ubuntu 18.04 :@guides:ubuntu:nginx:lynxchan:
+** How to setup LynxChan 2.2.x with Ubuntu 18.04 :@guides:ubuntu:nginx:lynxchan:
    :PROPERTIES:
    :EXPORT_FILE_NAME: lynxchan-setup-guide
    :EXPORT_DATE: <2019-10-24 Thu>
@@ -342,6 +341,30 @@
      sudo ./root-setup.sh
      #+end_src
 
+     You will be given two prompts:
+     #+begin_src bash
+     Do you wish to install the command lynxchan for all users using a soft-link? (y,n)
+     #+end_src
+
+     Answer yes, this will allow us to run =lynxchan= as a command
+     from our terminal.
+
+     #+begin_src bash
+     Do you wish to install a init script? Requires install as a command and an
+     user called node on the system to run the engine, so it also must have permissions
+     on the engine files. (systemd, upstart, openrc, blank for none)
+     #+end_src
+
+     For this prompt you should type =systemd=. This will allow us to
+     run LynxChan as a service.
+
+     *Optional:* You can enable LynxChan to boot on startup by running
+     the following command:
+
+     #+begin_src bash
+     sudo systemctl enable lynxchan
+     #+end_src
+
      Awesome! If everything was installed properly you can run the
      =lynxchan= command in your terminal, to which you should see
      something like this:
@@ -442,9 +465,21 @@
      (Y)es/(N)o:
      #+end_src
 
-     This one is up to your preference.
+     This one is up to your preference. Afterwards, certbot will run a
+     verification, and give you one final prompt.
 
-     ---
+     #+begin_src bash
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     1: No redirect - Make no further changes to the webserver configuration.
+     2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
+     new sites, or if you're confident your site works on HTTPS. You can undo this
+     change by editing your web server's configruation.
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     Select the appropriate number [1-2] then [enter] (press 'c' to cancel):
+     #+end_src
+
+     I strongly recommend enabling SSL by default with
+     =2=. Afterwards, your certificates should be successfully generated.
 
      Upon successfully generating our certificates will usually be generated
      in =/etc/letsencrypt/live/yourdomain.com/=
@@ -528,29 +563,42 @@
      terminal we can access our site through our domain, and see that
      it has a green lock indicating that SSL has been configured.
 
-*** Running LynxChan in the background
+     Congratulations your LynxChan imageboard is now successfully setup!
 
-    There are various methods to running LynxChan in the background on
-    your server, I personally prefer running it in a =tmux= terminal.
+*** Setting user upload size limit
+    From experience with assisting various new administrators, changing
+    the upload =Maximum size for requests (MB)= to values that exceed 8MB
+    may cause users to recieve various errors about their file size
+    uploads.
 
-    You can install =tmux= by typing:
+    This setting can be found at =https://yourdomain.com/globalSettings.js=.
+
+    [[https://i.imgur.com/E0fcRfW.png]]
+
+    In order to properly fix this, we are going to have to set a
+    parameter in our NGINX configuration files.
+
+    In =/etc/nginx/conf.d/default.conf=, we need to add the parameter
+    =client_max_body_size 50M= in the =location= block (you can change 50 to whatever value you
+    set in your global settings).
+
+    It should look something like this:
+
     #+begin_src bash
-    sudo apt-get install tmux
+    location / {
+	proxy_pass http://localhost:8080;
+	proxy_set_header Host $host;
+	proxy_set_header X-Forwarded-For $remote_addr;
+	client_max_body_size 50M; #Just add this line (Change the value to match the one in global settings)
+    }
     #+end_src
 
-    We can open up a new =tmux= terminal by simply typing =tmux= and
-    within that terminal we can start =lynxchan=.
-
-    After running LynxChan in our =tmux= terminal we can detatch the
-    process with =ctrl= + =b= and pressing =d=.
-
-    To access our terminal after detaching it we can type:
-    #+begin_src bash
-    tmux a -t 0
-    #+end_src
-
-    Congratulations you have successfully setup a basic LynxChan
-    site!
+    Afterwards, we will also need to set the same parameter up in our
+    =/etc/nginx/nginx.conf= file under the =http= block. Just add
+    =client_max_body_size 50M;=, and save your configuration
+    file. Finally, you can restart you NGINX server with =service
+    nginx restart= and you should not experience any warnings
+    regarding file upload sizes.
 
 * Personal Projects
   :PROPERTIES:
