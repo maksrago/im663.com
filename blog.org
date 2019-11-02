@@ -552,26 +552,6 @@
     Congratulations you have successfully setup a basic LynxChan
     site!
 
-** TODO How to setup ox-hugo with Emacs                             :@guides:emacs:
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: ox-hugo-setup
-   :EXPORT_DATE: <2019-10-24 Thu>
-   :END:
-   A guide on how to setup ox-hugo and make your own blog with Emacs.
-** TODO How to setup RMTP/HLS Livestreaming                         :@guides:ubuntu:nginx:
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: livestream-setup
-   :EXPORT_DATE: <2019-10-24 Thu>
-   :END:
-** TODO How to setup Onion services for LynxChan (enable your site to run as a hidden service) :@guides:ubuntu:nginx:
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: lynxchan-tor-setup
-   :EXPORT_DATE: <2019-10-24 Thu>
-   :END:
-   This is going to be a comprehensive guide on setting up your
-   LynxChan server to run as a hidden service, alongside the domain
-   that you have it pointed to. 
-
 * Personal Projects
   :PROPERTIES:
   :EXPORT_HUGO_SECTION: projects
