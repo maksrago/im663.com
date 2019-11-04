@@ -16,7 +16,10 @@ users a tremendous amount of time.
 **Please note:** For this guide I will be using [Namecheap](https://www.namecheap.com/) as my
 domain registrar, and [DigitalOcean](https://www.digitalocean.com/) as my VPS, the steps used in
 setting up your imageboard might vary slightly if you use a
-different domain registrar or VPS.
+different domain registrar or VPS. A great alternative to
+DigitalOcean is [Cockbox](https://cockbox.org/), domains can be purchased with Bitcoin, the
+same applies to Namecheap, so if you would like to setup and
+imageboard without giving out any personal information it is possible.
 
 **I plan on writing a few additional guides that will cover:**
 
@@ -87,6 +90,11 @@ Where you purchase your VPS shouldn't matter, for this
 guide I will be using [DigitalOcean](https://www.digitalocean.com/), if you use a different VPS or
 want to host LynxChan locally please make sure that your machine
 is running Ubuntu 18.04.
+
+**If privacy is a serious concern for you**: I recommend instead
+renting a server from [Cockbox](https://cockbox.org/) as they allow registration and
+payment through Bitcoin, thus no personal information is required
+in order to get your site up and running.
 
 You can sign up using this link:
 <https://try.digitalocean.com/performance/> to get $50 worth of
@@ -364,9 +372,19 @@ Upon running this script you will be prompted with several yes or
 no prompts, you can answer `y` to all of the prompts provided. The
 installation process should take a few minutes.
 
-After the installation is complete, we are going to run
-`root-setup.sh`, this will softlink LynxChan and allow us to run
-it by typing `lynxchan`
+In order to be able to LynxChan as a service we are going to have
+to create a new user by the name of `node`.
+
+```bash
+sudo adduser node
+```
+
+The only mandatory information that you need to fill out for this
+user is the password, use something secure.
+
+Now we are going to run `root-setup.sh`, this will softlink
+LynxChan and allow us to run it by typing `lynxchan`, as well as
+enabling LynxChan to run as a service.
 
 ```bash
 sudo ./root-setup.sh
@@ -396,6 +414,34 @@ the following command:
 ```bash
 sudo systemctl enable lynxchan
 ```
+
+Finally you can add `node` to be a sudoer, with:
+
+```bash
+sudo adduser node sudo
+```
+
+And reboot your server simply by typing `reboot`.
+
+Afterwards, we can SSH into our server as the `node` user by
+typing:
+
+```bash
+ssh node@yourserverip
+```
+
+Once you have connected to your server, you simply need to run
+this command in order to allow you to run the LynxChan service
+through this user:
+
+```bash
+sudo setcap 'cap_net_bind_service=+ep' `which node`
+```
+
+Now you can run all of the LynxChan service commands from your
+`node` user if you so desire.
+
+For the next steps we will need to SSH back into our root account.
 
 Awesome! If everything was installed properly you can run the
 `lynxchan` command in your terminal, to which you should see
@@ -646,3 +692,9 @@ Afterwards, we will also need to set the same parameter up in our
 file. Finally, you can restart you NGINX server with `service
     nginx restart` and you should not experience any warnings
 regarding file upload sizes.
+
+
+## Additional questions? {#additional-questions}
+
+If you have any questions regarding this guide or LynxChan in general
+you can post in [this](https://16chan.xyz/meta/res/917.html) thread on 16chan, or you can email me at [admin@16chan.xyz](mailto:admin@16chan.xyz).
