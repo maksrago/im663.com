@@ -7,4 +7,4 @@ This is my personal blog.
 ## License
 This project is licensed under the GPL v3.0 License - see the [LICENSE](LICENSE) for details.
 
-![](https://i.imgur.com/fS7xUXD.png)
+![](https://i.imgur.com/ef3hNhf.png)
