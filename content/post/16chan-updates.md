@@ -32,7 +32,6 @@ is there. These are the boards that are getting removed:
 -   `/hypno/`, Hypnotism
 -   `/int/`, International
 -   `/tv/`, Television & Film
-
 -   `/redpill/` and `/library/` will be merged into one board since they
     are so vastly similar and fragment traffic from one another.
 
@@ -44,7 +43,7 @@ work on this project after we have fully transitioned to LynxChan
 
 ## Migrating Hosts {#migrating-hosts}
 
-Currently we are hosting 16chan from DigitalOcean to [Cockbox](https://cockbox.org/) a more
+Currently we are hosting 16chan on DigitalOcean but we are migrating to [Cockbox](https://cockbox.org/), a more
 secure and privacy respecting VPS. There will be an announcement made
 for when the migration will be held, we expect it to take less than 24
 hours, the transition is projected to be smooth.
