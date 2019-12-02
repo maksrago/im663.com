@@ -30,33 +30,34 @@ imageboard without giving out any personal information it is possible.
     run with [Dashchan](https://github.com/Mishiranu/Dashchan))
 -   Setting up your site to run as a hidden service
 
-**A few important issues that you should know about LynxChan:**
+    **A few important issues that you should know about LynxChan:**
 
--   [Cloudflare](https://www.cloudflare.com/) currently breaks LynxChan. I am quite sure that
-    Cloudflare's caching system is responsible for this, but even
-    when disabling it I experienced random issues.  It may appear to work initially
-    however I've noticed the following problems:
-    -   Thread based unique ID's can get randomly assigned to
-        several users.
-    -   Banning a single user can cause multiple users to get banned.
+    -   [Cloudflare](https://www.cloudflare.com/) currently breaks LynxChan. I am quite sure that
+        Cloudflare's caching system is responsible for this, but even
+        when disabling it I experienced random issues.  It may appear to work initially
+        however I've noticed the following problems:
 
-If you plan on using a [CDN](https://en.wikipedia.org/wiki/Content%5Fdelivery%5Fnetwork) or some sort of DDoS mitigation service,
-you might want to find an alternative, I haven't tested any others
-thus far.
+        -   Thread based unique ID's can get randomly assigned to
+            several users.
+        -   Banning a single user can cause multiple users to get banned.
 
--   SSL through LynxChan does not work very well, and it's likely a
-    problem with [Node.js HTTP2 support](https://github.com/nodejs/node/issues/29529). I attempted to use the
-    documentation provided by LynxChan to setup SSL however it caused
-    regular crashes of Node.js causing my site to go down and be
-    extremely unreliable. It's for this reason that this guide will
-    use an NGINX reverse proxy for SSL functionality.
-    -   It should be noted however that some LynxChan based imageboard ([freech.net](https://freech.net/) being the only one that I know of thus far)
-        that have been able to successfully run SSL off of Node
-        server. I will update this guide when I can successfully get it
-        configured and stable.
-        -   This issue should no longer be a problem in [LynxChan's 2.3
-            release](http://lynxhub.com/lynxchan/res/1480.html) in which "Opt-in HTTP2" will be added, allowing you
-            to use SSL through Node.js successfully without all the crashes.
+        If you plan on using a [CDN](https://en.wikipedia.org/wiki/Content%5Fdelivery%5Fnetwork) or some sort of DDoS mitigation service,
+        you might want to find an alternative, I haven't tested any others
+        thus far.
+
+        -   SSL through LynxChan does not work very well, and it's likely a
+            problem with [Node.js HTTP2 support](https://github.com/nodejs/node/issues/29529). I attempted to use the
+            documentation provided by LynxChan to setup SSL however it caused
+            regular crashes of Node.js causing my site to go down and be
+            extremely unreliable. It's for this reason that this guide will
+            use an NGINX reverse proxy for SSL functionality.
+            -   It should be noted however that some LynxChan based imageboard ([freech.net](https://freech.net/) being the only one that I know of thus far)
+                that have been able to successfully run SSL off of Node
+                server. I will update this guide when I can successfully get it
+                configured and stable.
+                -   This issue should no longer be a problem in [LynxChan's 2.3
+                    release](http://lynxhub.com/lynxchan/res/1480.html) in which "Opt-in HTTP2" will be added, allowing you
+                    to use SSL through Node.js successfully without all the crashes.
 
 
 ## Getting a domain {#getting-a-domain}
@@ -81,7 +82,7 @@ following three nameservers for DigitalOcean:
 -   `ns2.digitalocean.com`
 -   `ns3.digitalocean.com`
 
-{{< figure src="https://i.imgur.com/mtKTxP3.png" >}}
+    {{< figure src="https://i.imgur.com/mtKTxP3.png" >}}
 
 
 ## Getting a VPS {#getting-a-vps}
@@ -690,7 +691,7 @@ Afterwards, we will also need to set the same parameter up in our
 `/etc/nginx/nginx.conf` file under the `http` block. Just add
 `client_max_body_size 50M;`, and save your configuration
 file. Finally, you can restart you NGINX server with `service
-    nginx restart` and you should not experience any warnings
+nginx restart` and you should not experience any warnings
 regarding file upload sizes.
 
 

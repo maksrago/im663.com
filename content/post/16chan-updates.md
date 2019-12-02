@@ -1,5 +1,5 @@
 +++
-title = "Changes coming to 16chan"
+title = "Changes Coming to 16chan"
 date = 2019-11-10T00:00:00-05:00
 tags = ["16chan"]
 categories = ["16chan"]

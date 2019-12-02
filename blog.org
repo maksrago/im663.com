@@ -2,14 +2,293 @@
 #+options: author:nil
 
 * Posts
-  :PROPERTIES:
-  :EXPORT_HUGO_SECTION: post
-  :END:
-** Changes coming to 16chan :@16chan:16chan:
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: 16chan-updates
-   :EXPORT_DATE: <2019-11-10 Sun>
-   :END:
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: post
+:END:
+** How to add app support for LynxChan imageboards (through DashChan) :@guides:lynxchan:ubuntu:
+:PROPERTIES:
+:EXPORT_FILE_NAME: dashchan-setup-guide
+:EXPORT_DATE: <2019-12-02 Mon>
+:END:
+Since launching [[https://www.16chan.xyz][16chan]] I've had several users and imageboard administrators reach out to me on
+how to add mobile app support to their [[https://gitgud.io/LynxChan/LynxChan][LynxChan]] based imageboard.
+For those unfamiliar, [[https://github.com/Mishiranu/Dashchan][DashChan]] is a modular
+imageboard browsing app. Support for imageboards is enabled by
+downloading the appropriate extension, thus in order to get support
+for your imageboard, you will have to create a APK that can be added
+to the DashChan app. I created a generic extension, that only requires
+a few basic changes in order to add support for your LynxChan based
+site. This guide is specifically built around Ubuntu, specifically
+versions that have =snapd= installed. We will also be using Android Studio.
+
+The repository containing the generic DashChan extension can be
+found [[https://github.com/maksrago/Dashchan-Extension-LynxChan-Generic][here]].
+
+**Things that do not work with this extension:**
+- Captcha
+- Reports
+
+*** Installing, configuring, and importing our project to Android Studio
+In order to access and modify our project, we are going to have to
+first install Android studio.
+
+Install Android studio with this simple command:
+#+begin_src bash
+snap install android-studio --classic
+#+end_src
+
+Afterwards, we can clone the generic LynxChan DashChan extension with:
+#+begin_src bash
+git clone https://github.com/maksrago/Dashchan-Extension-LynxChan-Generic
+#+end_src
+
+When opening Android Studio you will be given several prompts, and
+after successful installation and configuration you will be able to
+open projects.
+
+https://i.imgur.com/ml5C3sd.png
+
+We are going to =Import project (Gradle, Eclipse ADT, etc)=. From
+there you can specify the directory to where you cloned the extension.
+
+https://i.imgur.com/x3jB1W2.png
+
+Afterwards, you will likely see this prompt:
+
+https://i.imgur.com/59Awnn0.png
+
+To which you should answer =OK=. Once the gradle sync is successfully
+completed you should see the following:
+
+https://i.imgur.com/pzZPDi6.png
+*** Setting the project default behavior
+This project makes it extremely easy to add support for your
+imageboard, we are just going to make a few changes, however, before
+we do anything we need to setup our projects default
+behavior. Navigate to the top bar and click: =Edit Configurations..=
+from the dropdown.
+
+https://i.imgur.com/k0q4Zi5.png
+
+From there, we can set the default behavior to =Nothing=:
+
+https://i.imgur.com/jiWcSQ5.png
+
+Put simply, this APK acts as a set of instructions for the DashChan
+app, and how it should interpret and pull data from the specified
+source we direct it to.
+*** Setting up Android Device (physical device or emulator)
+Select one of these options, I would highly recommend using a physical
+Android device you have one available.
+**** If you have a physical Android device
+You will need to follow these steps:
+***** 1. Put your device into developer mode, and enable USB debugging
+The process that you need to follow in order to put your Android
+device into developer mode will vary, thus I would recommend searching
+up how to do so in your search engine of choice.
+
+After you successfully put your device into USB debugging mode, and
+connect it to your computer you may see the following prompt on your
+device:
+
+https://i.imgur.com/3S3rMuT.png
+
+I recommend checking off =Always allow from this computer=.
+
+***** 2. Install the DashChan application and supporting libraries
+- Download the DashChan APK, found [[https://github.com/Mishiranu/Dashchan-Extensions/raw/master/update/package/Dashchan.apk][here]].
+- Download the DashChan WebM libraries [[https://github.com/Mishiranu/Dashchan-Extensions/raw/master/update/package/DashchanWebm.apk][here]].
+
+The link to the DashChan repository, can be found [[https://github.com/Mishiranu/Dashchan][here]].
+**** **(If you don't have a physical device)** Setting up an Android Emulator through Android Studio
+To my knowledge, this option is only available to users running on
+Intel based systems.
+
+**I do not recommend this option, due to the fact that it requires
+quite a powerful system to emulate Android smoothly.**
+
+To setup an Android device emulator, go to the top bar, and under =No
+Device=, and under the dropdown you'll the the option of =Open AVD Manager=.
+
+https://i.imgur.com/23PiAv6.png
+
+From there you should =Create Virtual Device...=
+https://i.imgur.com/ZHtj3YO.png
+
+From there you can select a device that you with to emulate, in my
+case I stuck with the default:
+
+https://i.imgur.com/wFMwyLM.png
+
+You can also customize the Android version on the emulated device, I
+used Q:
+
+https://i.imgur.com/w32iQgP.png
+
+Afterwards, Android Studio will download and pull your version of
+Android that you specified and install it on your emulator:
+
+https://i.imgur.com/xYEGD9r.png
+
+Finally, you can specify any additional settings for your emulator, we
+should be fine with the default settings, so just hit =Finish=.
+
+https://i.imgur.com/1ttBBk3.png
+
+After your emulator is successfully configured, make sure that:
+
+***** 1. Put your device into developer mode if it isn't already, and enable USB debugging
+The process that you need to follow in order to put your Android
+device into developer mode will vary, thus I would recommend searching
+up how to do so in your search engine of choice.
+***** 2. Install the DashChan application and supporting libraries
+- Download the DashChan APK, found [[https://github.com/Mishiranu/Dashchan-Extensions/raw/master/update/package/Dashchan.apk][here]].
+- Download the DashChan WebM libraries [[https://github.com/Mishiranu/Dashchan-Extensions/raw/master/update/package/DashchanWebm.apk][here]].
+
+The link to the DashChan repository, can be found [[https://github.com/Mishiranu/Dashchan][here]].
+
+**** After successfully setting up your device
+You should see one of the following options in your Android Studio now
+depending on whether you chose to use a physical device or a emulated
+device:
+
+https://i.imgur.com/kEB5GKZ.png
+
+You should see the name of your physical device, or the emulated
+device name along with the API version your selected in the previous
+optional step.
+
+*** Setting up our boards list
+If order for the DashChan extension to work properly, we are going to
+need to create a new html file in the =/static/= directory of our
+LynxChan frontend, the exact location would be
+=~/LynxChan/src/fe/static/=. This file should be named =boardsList.html=, in this
+file you will add the respective boards for your site, an example
+=boardsList.html= might look like:
+
+#+begin_src html
+<h2>NSFW</h2>
+<ul class="boardlist">
+  <li><a href="/b/">Random</a></li>
+  <li><a href="/library/">Library</a></li>
+  <li><a href="/pol/">Politically Incorrect</a></li>
+  <li><a href="/r9k/">ROBOT9001</a></li>
+</ul>
+
+<h2>SFW</h2>
+<ul class="boardlist">
+  <li><a href="/culture/">Culture</a></li>
+  <li><a href="/g/">Technology</a></li>
+  <li><a href="/k/">Weapons</a></li>
+  <li><a href="/meta/">16chan Discussion</a></li>
+  <li><a href="/v/">Video Games</a></li>
+</ul>
+#+end_src
+
+As you may have already noticed, you can use =<h2>= tags in order to
+specify a category or a heading for categorizing your boards.
+
+*** Making modifications to the project (DashChan module)
+Now, we can add personalized changes to the project and point it to
+our LynxChan site!
+
+From there we are going to need to modify the following files:
+-=AndroidManifest.xml=
+-=LynxchanChanLocator.java=
+-=LynxchanChanConfiguration.java=
+
+**** Modifying: =AndroidManifest.xml=
+**Located in:** =~/Dashchan-Extension-LynxChan-Generic/=
+
+
+In the =AndroidManifest.xml= file we are going to modify lines 29 and
+30 to correspond to our imageboard's domain, in the case of 16chan it
+would look like:
+
+/line 29/
+#+begin_src java
+<data android:host="16chan.xyz" />
+#+end_src
+
+and
+
+/line 30/
+#+begin_src java
+<data android:host="www.16chan.xyz" />
+#+end_src
+
+**** Modifying: =LynxchanChanLocator.java=
+**Located in:** =~/Dashchan-Extension-LynxChan-Generic/src/com/sixsixthree/dashchan/chan/lynxchan/=
+
+We just need to modify this file with our site domain information once
+again, on lines 18 and 19, so in the case of 16chan it would look
+like:
+
+/line 18/
+#+begin_src java
+addChanHost("16chan.xyz");
+#+end_src
+
+and
+
+/line 19/
+#+begin_src java
+addConvertableChanHost("www.16chan.xyz");
+#+end_src
+
+**** Modifying: =LynxchanChanconfiguration.java=
+**Located in:**
+=~/Dashchan-Extension-LynxChan-Generic/src/com/sixsixthree/dashchan/chan/lynxchan/=
+
+Here you might want to make several modifications depending on the
+your site, and how you configured it.
+
+On line 34 you can specify the amount of attatchments that you want to
+allow users to post, this should correspond to your site's
+=Maximum number of uploaded files on posting= a setting that is found
+under your site's Global Settings.
+
+Furthermore, you can add and remove supported mime types just below
+that setting, the default settings should work just fine if you don't
+have any additional customization with mime types.
+
+*** Testing our APK
+We can begin by opening the DashChan application on our device, you
+should see something similar to this:
+
+https://i.imgur.com/jcle1G3.png
+
+To test the module we just customized we can click the little green
+arrow on the top bar:
+
+https://i.imgur.com/zm6BaBg.png
+
+Afterwards you can restart the DashChan application, if you
+succesfully configured everything you should see the boards that you
+specified in your =boardsList.html= file. In my case:
+
+https://i.imgur.com/bO40UeF.png
+
+*** Creating a shareable APK
+Upon successfully testing and making various changes to the project,
+you can generate a compiled APK file by selecting =Build= > =Build
+Bundle(s) / APK(s)= > =Build APK(s)=, you should then see something
+like this:
+
+https://i.imgur.com/3iidjlJ.png
+
+This APK will be located in
+=~/Dashchan-Extension-LynxChan-Generic/build/outputs/apk/debug/=, you
+can then upload it to either some version control site (Github/Gitgud)
+or host it on your site. Either way I recommend making a page similar to
+https://16chan.xyz/.static/pages/mobile.html, to make it easy for your
+users to understand how to setup up the application.
+
+** Changes Coming to 16chan :@16chan:16chan:
+:PROPERTIES:
+:EXPORT_FILE_NAME: 16chan-updates
+:EXPORT_DATE: <2019-11-10 Sun>
+:END:
 Greetings Anons, this is the first update regarding 16chan's
 development path. As some of you may or may not know, LynxChan is
 getting an update to version 2.3.0 (we are currently on 2.2.X) and
@@ -59,557 +338,557 @@ updates on 16chan's =/meta/= board, and through global announcements
 on 16chan.
 
 ** How to setup LynxChan 2.2.x with Ubuntu 18.04 :@guides:ubuntu:nginx:lynxchan:
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: lynxchan-setup-guide
-   :EXPORT_DATE: <2019-11-02 Sat>
-   :END:
-   This is a comprehensive guide on setting up the [[https://www.gitgud.io/LynxChan/LynxChan][LynxChan]] imageboard
-   engine for the absolute layman, along with various additional
-   necessities that come with hosting an imageboard. When I was first
-   initially starting [[https://16chan.xyz/][16chan]] I found that there were very few guides
-   that existed at the time, and I feel that this guide can save many
-   users a tremendous amount of time.
+:PROPERTIES:
+:EXPORT_FILE_NAME: lynxchan-setup-guide
+:EXPORT_DATE: <2019-11-02 Sat>
+:END:
+This is a comprehensive guide on setting up the [[https://www.gitgud.io/LynxChan/LynxChan][LynxChan]] imageboard
+engine for the absolute layman, along with various additional
+necessities that come with hosting an imageboard. When I was first
+initially starting [[https://16chan.xyz/][16chan]] I found that there were very few guides
+that existed at the time, and I feel that this guide can save many
+users a tremendous amount of time.
 
-   *Please note:* For this guide I will be using [[https://www.namecheap.com/][Namecheap]] as my
-   domain registrar, and [[https://www.digitalocean.com/][DigitalOcean]] as my VPS, the steps used in
-   setting up your imageboard might vary slightly if you use a
-   different domain registrar or VPS. A great alternative to
-   DigitalOcean is [[https://cockbox.org/][Cockbox]], domains can be purchased with Bitcoin, the
-   same applies to Namecheap, so if you would like to setup and
-   imageboard without giving out any personal information it is possible.
+*Please note:* For this guide I will be using [[https://www.namecheap.com/][Namecheap]] as my
+domain registrar, and [[https://www.digitalocean.com/][DigitalOcean]] as my VPS, the steps used in
+setting up your imageboard might vary slightly if you use a
+different domain registrar or VPS. A great alternative to
+DigitalOcean is [[https://cockbox.org/][Cockbox]], domains can be purchased with Bitcoin, the
+same applies to Namecheap, so if you would like to setup and
+imageboard without giving out any personal information it is possible.
 
-   *I plan on writing a few additional guides that will cover:*
-   - How to setup a libre analytics platform (I like [[https://matomo.org/][Matomo]] -- A great
-     alternative to Google Analytics)
-   - Setting up some useful addons with LynxChan
-   - How to add app support for your LynxChan site (create a module to
-     run with [[https://github.com/Mishiranu/Dashchan][Dashchan]])
-   - Setting up your site to run as a hidden service
+*I plan on writing a few additional guides that will cover:*
+          - How to setup a libre analytics platform (I like [[https://matomo.org/][Matomo]] -- A great
+            alternative to Google Analytics)
+          - Setting up some useful addons with LynxChan
+          - How to add app support for your LynxChan site (create a module to
+            run with [[https://github.com/Mishiranu/Dashchan][Dashchan]])
+          - Setting up your site to run as a hidden service
 
-   *A few important issues that you should know about LynxChan:*
-   - [[https://www.cloudflare.com/][Cloudflare]] currently breaks LynxChan. I am quite sure that
-     Cloudflare's caching system is responsible for this, but even
-     when disabling it I experienced random issues.  It may appear to work initially
-     however I've noticed the following problems:
-     - Thread based unique ID's can get randomly assigned to
-       several users.
-     - Banning a single user can cause multiple users to get banned.
-   If you plan on using a [[https://en.wikipedia.org/wiki/Content_delivery_network][CDN]] or some sort of DDoS mitigation service,
-   you might want to find an alternative, I haven't tested any others
-   thus far.
-   - SSL through LynxChan does not work very well, and it's likely a
-     problem with [[https://github.com/nodejs/node/issues/29529][Node.js HTTP2 support]]. I attempted to use the
-     documentation provided by LynxChan to setup SSL however it caused
-     regular crashes of Node.js causing my site to go down and be
-     extremely unreliable. It's for this reason that this guide will
-     use an NGINX reverse proxy for SSL functionality.
-     - It should be noted however that some LynxChan based imageboard ([[https://freech.net/][freech.net]] being the only one that I know of thus far)
-       that have been able to successfully run SSL off of Node
-       server. I will update this guide when I can successfully get it
-       configured and stable.
-       - This issue should no longer be a problem in [[http://lynxhub.com/lynxchan/res/1480.html][LynxChan's 2.3
-         release]] in which "Opt-in HTTP2" will be added, allowing you
-         to use SSL through Node.js successfully without all the crashes.
+            *A few important issues that you should know about LynxChan:*
+            - [[https://www.cloudflare.com/][Cloudflare]] currently breaks LynxChan. I am quite sure that
+              Cloudflare's caching system is responsible for this, but even
+              when disabling it I experienced random issues.  It may appear to work initially
+              however I've noticed the following problems:
+              - Thread based unique ID's can get randomly assigned to
+                several users.
+              - Banning a single user can cause multiple users to get banned.
+              If you plan on using a [[https://en.wikipedia.org/wiki/Content_delivery_network][CDN]] or some sort of DDoS mitigation service,
+              you might want to find an alternative, I haven't tested any others
+              thus far.
+              - SSL through LynxChan does not work very well, and it's likely a
+                problem with [[https://github.com/nodejs/node/issues/29529][Node.js HTTP2 support]]. I attempted to use the
+                documentation provided by LynxChan to setup SSL however it caused
+                regular crashes of Node.js causing my site to go down and be
+                extremely unreliable. It's for this reason that this guide will
+                use an NGINX reverse proxy for SSL functionality.
+                - It should be noted however that some LynxChan based imageboard ([[https://freech.net/][freech.net]] being the only one that I know of thus far)
+                  that have been able to successfully run SSL off of Node
+                  server. I will update this guide when I can successfully get it
+                  configured and stable.
+                  - This issue should no longer be a problem in [[http://lynxhub.com/lynxchan/res/1480.html][LynxChan's 2.3
+                    release]] in which "Opt-in HTTP2" will be added, allowing you
+                    to use SSL through Node.js successfully without all the crashes.
 
 *** Getting a domain
-    Where you purchase your sites domain shouldn't matter, for this
-    guide I will be using [[https://www.namecheap.com/][Namecheap]].
+Where you purchase your sites domain shouldn't matter, for this
+guide I will be using [[https://www.namecheap.com/][Namecheap]].
 
 **** Configuring our DNS settings
-     Upon purchasing your domain, you  will be able to modify various
-     settings in your *Dashboard*. From there you will want to click
-     the *Manage* button.
+Upon purchasing your domain, you  will be able to modify various
+settings in your *Dashboard*. From there you will want to click
+the *Manage* button.
 
-     [[https://i.imgur.com/bKmGoFb.png]]
+[[https://i.imgur.com/bKmGoFb.png]]
 
-     Under the *Nameservers* section we need to select the dropdown,
-     and select *Custom DNS*. We are going to need to input the
-     following three nameservers for DigitalOcean:
-     - =ns1.digitalocean.com=
-     - =ns2.digitalocean.com=
-     - =ns3.digitalocean.com=
+Under the *Nameservers* section we need to select the dropdown,
+and select *Custom DNS*. We are going to need to input the
+following three nameservers for DigitalOcean:
+  - =ns1.digitalocean.com=
+  - =ns2.digitalocean.com=
+  - =ns3.digitalocean.com=
 
-     [[https://i.imgur.com/mtKTxP3.png]]
+    [[https://i.imgur.com/mtKTxP3.png]]
 
 *** Getting a VPS
-    Where you purchase your VPS shouldn't matter, for this
-    guide I will be using [[https://www.digitalocean.com/][DigitalOcean]], if you use a different VPS or
-    want to host LynxChan locally please make sure that your machine
-    is running Ubuntu 18.04.
+Where you purchase your VPS shouldn't matter, for this
+guide I will be using [[https://www.digitalocean.com/][DigitalOcean]], if you use a different VPS or
+want to host LynxChan locally please make sure that your machine
+is running Ubuntu 18.04.
 
-    *If privacy is a serious concern for you*: I recommend instead
-    renting a server from [[https://cockbox.org/][Cockbox]] as they allow registration and
-    payment through Bitcoin, thus no personal information is required
-    in order to get your site up and running.
+*If privacy is a serious concern for you*: I recommend instead
+renting a server from [[https://cockbox.org/][Cockbox]] as they allow registration and
+payment through Bitcoin, thus no personal information is required
+in order to get your site up and running.
 
-    You can sign up using this link:
-    https://try.digitalocean.com/performance/ to get $50 worth of
-    free credit for your first month.
+You can sign up using this link:
+https://try.digitalocean.com/performance/ to get $50 worth of
+free credit for your first month.
 
-    Upon creating and confirming your new account, we are going to
-    create a new Droplet.
+Upon creating and confirming your new account, we are going to
+create a new Droplet.
 
-    [[https://i.imgur.com/WJvJSWj.png]]
+[[https://i.imgur.com/WJvJSWj.png]]
 
-    These are the settings that I used, and the $5 a month tier should
-    suffice for a small imageboard. The only setting that matters here
-    is that we use Ubuntu 18.04.
+These are the settings that I used, and the $5 a month tier should
+suffice for a small imageboard. The only setting that matters here
+is that we use Ubuntu 18.04.
 
-    [[https://i.imgur.com/wIQIRYS.png]]
+[[https://i.imgur.com/wIQIRYS.png]]
 
-    You can select the server location that works best for you.
+You can select the server location that works best for you.
 
-    [[https://i.imgur.com/ZytJ1OU.png]]
+[[https://i.imgur.com/ZytJ1OU.png]]
 
-    Finally, I highly recommend enabling automatic backups, just in
-    case MongoDB breaks (which it can occasionaly). However, it is
-    optional.
+Finally, I highly recommend enabling automatic backups, just in
+case MongoDB breaks (which it can occasionaly). However, it is
+optional.
 
-    [[https://i.imgur.com/1osqIrp.png]]
+[[https://i.imgur.com/1osqIrp.png]]
 
 **** SSHing into our VPS
-     It will take a moment to create our droplet, but after it's done
-     we can enter our control panel.
+It will take a moment to create our droplet, but after it's done
+we can enter our control panel.
 
-     [[https://i.imgur.com/0DfAYSP.png]]
+[[https://i.imgur.com/0DfAYSP.png]]
 
-     The IP address listed in our droplet's control panel is the IP
-     address we will put into our SSH client. We still, however, need
-     to get the password for our VPS. From the control panel we can
-     click on *Access* to request a password to be emailed to us.
+The IP address listed in our droplet's control panel is the IP
+address we will put into our SSH client. We still, however, need
+to get the password for our VPS. From the control panel we can
+click on *Access* to request a password to be emailed to us.
 
-     [[https://i.imgur.com/LEKGFsv.png]]
+[[https://i.imgur.com/LEKGFsv.png]]
 
-     [[https://i.imgur.com/EBewlsb.png]]
+[[https://i.imgur.com/EBewlsb.png]]
 
-     You should receive an email from DigitalOcean shortly with the
-     droplets credentials.
+You should receive an email from DigitalOcean shortly with the
+droplets credentials.
 
-     [[https://i.imgur.com/CGfx4r9.png]]
+[[https://i.imgur.com/CGfx4r9.png]]
 
-     Once we get our password we can finally SSH into our DigitalOcean
-     droplet.
+Once we get our password we can finally SSH into our DigitalOcean
+droplet.
 
-     If you're on Windows I suggest using [[https://www.chiark.greenend.org.uk/~sgtatham/putty/][PuTTY]] or a similar
-     program to connect to your server.
+If you're on Windows I suggest using [[https://www.chiark.greenend.org.uk/~sgtatham/putty/][PuTTY]] or a similar
+program to connect to your server.
 
-     On *NIX operating systems we can simply type
+On *NIX operating systems we can simply type
 
-     #+begin_src bash
-     ssh root@yourserverip
-     #+end_src
+#+begin_src bash
+ssh root@yourserverip
+#+end_src
 
-     In my case, the command would look like this.
+In my case, the command would look like this.
 
-     #+begin_src bash
-     ssh root@206.189.200.133
-     #+end_src
+#+begin_src bash
+ssh root@206.189.200.133
+#+end_src
 
-     Upon successfully connecting to your droplet you will be prompted
-     for a password, you can copy the password emailed to you from
-     DigitalOcean and paste it into your terminal, and afterwards you
-     will be prompted to change your password to something
-     else.
+Upon successfully connecting to your droplet you will be prompted
+for a password, you can copy the password emailed to you from
+DigitalOcean and paste it into your terminal, and afterwards you
+will be prompted to change your password to something
+else.
 
-     Before we start installing LynxChan on our server we need to
-     setup our DNS settings to work properly with the domain that we purchased.
+Before we start installing LynxChan on our server we need to
+setup our DNS settings to work properly with the domain that we purchased.
 
 **** Configuring our DNS settings on DigitalOcean
-     We are going to need to setup our DNS settings in DigitalOcean
-     now.
+We are going to need to setup our DNS settings in DigitalOcean
+now.
 
-     [[https://i.imgur.com/6NVFaWY.png]]
+[[https://i.imgur.com/6NVFaWY.png]]
 
-     Here we can add our domain that we purchased earlier.
+Here we can add our domain that we purchased earlier.
 
-     [[https://i.imgur.com/FTiWD3x.png]]
+[[https://i.imgur.com/FTiWD3x.png]]
 
-     Upon adding our domain, DigitalOcean will generate the =NS= records
-     for us, we just need to add two records.
+Upon adding our domain, DigitalOcean will generate the =NS= records
+for us, we just need to add two records.
 
-     We are going to add an =@= A record.
+We are going to add an =@= A record.
 
-     [[https://i.imgur.com/TRviOOf.png]]
+[[https://i.imgur.com/TRviOOf.png]]
 
-     And we are going to add a =www= A record.
+And we are going to add a =www= A record.
 
-     https://i.imgur.com/grGKsen.png
+https://i.imgur.com/grGKsen.png
 
-     This will allow users to access our site from both typing
-     yourdomain.com and www.yourdomain.com.
+This will allow users to access our site from both typing
+yourdomain.com and www.yourdomain.com.
 
-     We are done configuring DNS settings, we can finally move onto
-     setting up LynxChan on our DigitalOcean droplet.
+We are done configuring DNS settings, we can finally move onto
+setting up LynxChan on our DigitalOcean droplet.
 
 *** Setting up LynxChan
-    We can finally start installing LynxChan on our VPS!
+We can finally start installing LynxChan on our VPS!
 
-    In order to be able to download and get LynxChan running properly
-    we're going to have to first download a few packages.
+In order to be able to download and get LynxChan running properly
+we're going to have to first download a few packages.
 
-    According to the LynxChan [[https://gitgud.io/LynxChan/LynxChan/blob/master/Readme.md][Readme.md]] we are going to need to
-    following packages
+According to the LynxChan [[https://gitgud.io/LynxChan/LynxChan/blob/master/Readme.md][Readme.md]] we are going to need to
+following packages
 
-    #+begin_quote
-    - [[http://nodejs.org][Node.js]] 12.x, I suggest installing from source code. DO NOT build the master's HEAD.
-    - [[https://www.mongodb.org/][MongoDB]] 4.0.x.
-    - [[http://www.info-zip.org][UnZip]] 6.00, this is probably already included in your distro, though.
-    - [[http://curl.haxx.se][cUrl]] 7.29.0, this is usually included too.
-    - [[http://www.imagemagick.org/script/index.php][ImageMagick]] 6.7.8-9
-    - [[https://gitgud.io/LynxChan/PenumbraLynx][A front-end]] that must either be placed on the `src/fe` directory or have it's absolute path set on the general.json file. Read the readme.md on src/be for more information about how to configure the path for the front-end.
-    - [[https://www.ffmpeg.org/][ffmpeg]] (Optional) 4.1 if mediaThumb setting is enabled. Requires zlib-devel on centOS to work properly when compiled from source.
-    - [[https://www.proofpoint.com/us/open-source-email-solution][Sendmail]] (Optional) 8.14.7 if the option to send e-mails through sendmail is enabled.
-    - [[http://www.darwinsys.com/file/][file]] (Optional) 5.11 if the option to validate upload mimetypes is enabled.
-    - [[https://www.sno.phy.queensu.ca/~phil/exiftool/][exiftool]] (Optional) 11.01 if the option to strip exif data is enabled.
-    #+end_quote
+#+begin_quote
+- [[http://nodejs.org][Node.js]] 12.x, I suggest installing from source code. DO NOT build the master's HEAD.
+- [[https://www.mongodb.org/][MongoDB]] 4.0.x.
+- [[http://www.info-zip.org][UnZip]] 6.00, this is probably already included in your distro, though.
+- [[http://curl.haxx.se][cUrl]] 7.29.0, this is usually included too.
+- [[http://www.imagemagick.org/script/index.php][ImageMagick]] 6.7.8-9
+- [[https://gitgud.io/LynxChan/PenumbraLynx][A front-end]] that must either be placed on the `src/fe` directory or have it's absolute path set on the general.json file. Read the readme.md on src/be for more information about how to configure the path for the front-end.
+- [[https://www.ffmpeg.org/][ffmpeg]] (Optional) 4.1 if mediaThumb setting is enabled. Requires zlib-devel on centOS to work properly when compiled from source.
+- [[https://www.proofpoint.com/us/open-source-email-solution][Sendmail]] (Optional) 8.14.7 if the option to send e-mails through sendmail is enabled.
+- [[http://www.darwinsys.com/file/][file]] (Optional) 5.11 if the option to validate upload mimetypes is enabled.
+- [[https://www.sno.phy.queensu.ca/~phil/exiftool/][exiftool]] (Optional) 11.01 if the option to strip exif data is enabled.
+#+end_quote
 **** Updating our system
-     We're going to start off with updating our system to make sure we
-     are working with the most updated packages that the system will
-     provide us.
-     #+begin_src bash
-     sudo apt-get update
-     sudo apt-get upgrade
-     #+end_src
-     Afterwards we are going to reboot the system in an effort to
-     syncronize those packages.
-     #+begin_src bash
-     sudo reboot
-     #+end_src
+We're going to start off with updating our system to make sure we
+are working with the most updated packages that the system will
+provide us.
+#+begin_src bash
+sudo apt-get update
+sudo apt-get upgrade
+#+end_src
+Afterwards we are going to reboot the system in an effort to
+syncronize those packages.
+#+begin_src bash
+sudo reboot
+#+end_src
 **** Installing the correct version of Node.js
-     We are going to start off with install Node.js, *please note* the
-     version provided within the existing repositories on Ubuntu is
-     usually not the correct version and usually causes the LynxChan
-     engine to break.
+We are going to start off with install Node.js, *please note* the
+version provided within the existing repositories on Ubuntu is
+usually not the correct version and usually causes the LynxChan
+engine to break.
 
-     For that reason we are going to install Node.js through the
-     official Node APT repository (you can also compile a version of
-     Node.js that is the correct version, but the version provided by
-     the Node APT will suffice).
+For that reason we are going to install Node.js through the
+official Node APT repository (you can also compile a version of
+Node.js that is the correct version, but the version provided by
+the Node APT will suffice).
 
-     #+begin_src bash
-     sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
-     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-     sudo apt -y install nodejs
-     #+end_src
+#+begin_src bash
+sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt -y install nodejs
+#+end_src
 
-     Afterwards you can check your version of Node.js with:
+Afterwards you can check your version of Node.js with:
 
-     #+begin_src bash
-     node --version
-     #+end_src
+#+begin_src bash
+node --version
+#+end_src
 
-     Which should output something like this:
+Which should output something like this:
 
-     #+begin_src bash
-     v12.10.0
-     #+end_src
+#+begin_src bash
+v12.10.0
+#+end_src
 
 **** Installing the correct version of MongoDB
-     Similarly to Node.js, usually the MongoDB package that is hosted
-     by default in the Ubuntu repositories is outdated and will cause
-     LynxChan to break, so we are going to install the correct version
-     from the MongoDB APT repository.
+Similarly to Node.js, usually the MongoDB package that is hosted
+by default in the Ubuntu repositories is outdated and will cause
+LynxChan to break, so we are going to install the correct version
+from the MongoDB APT repository.
 
-     Start off by importing the GPK key for the MongoDB apt repository.
-     #+begin_src bash
-     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
-     #+end_src
+Start off by importing the GPK key for the MongoDB apt repository.
+#+begin_src bash
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+#+end_src
 
-     Next we are going to add the MongoDB APT repository to =/etc/apt/sources.list.d/mongodb.list=
-     #+begin_src bash
-     echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
-     #+end_src
+Next we are going to add the MongoDB APT repository to =/etc/apt/sources.list.d/mongodb.list=
+#+begin_src bash
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
+#+end_src
 
-     Next, we can install MongoDB.
+Next, we can install MongoDB.
 
-     #+begin_src bash
-     sudo apt-get update
-     sudo apt-get install mongodb-org
-     #+end_src
+#+begin_src bash
+sudo apt-get update
+sudo apt-get install mongodb-org
+#+end_src
 
-     Afterwards, you will want to enable MongoDB to run as a service
-     with:
+Afterwards, you will want to enable MongoDB to run as a service
+with:
 
-     #+begin_src bash
-     sudo systemctl enable mongod
-     sudo systemctl start mongod
-     #+end_src
+#+begin_src bash
+sudo systemctl enable mongod
+sudo systemctl start mongod
+#+end_src
 
-     Finally, verify your version of MongoDB with:
+Finally, verify your version of MongoDB with:
 
-     #+begin_src bash
-     mongod --version
-     #+end_src
+#+begin_src bash
+mongod --version
+#+end_src
 
-     You should see an Output similar to this:
-     #+begin_src bash
-     db version v4.0.1
-     git version: 54f1582fc6eb01de4d4c42f26fc133e623f065fb
-     OpenSSL version: OpenSSL 1.1.0h  27 Mar 2018
-     allocator: tcmalloc
-     modules: none
-     build environment:
-     distmod: ubuntu1804
-     distarch: x86_64
-     target_arch: x86_64
-     #+end_src
+You should see an Output similar to this:
+#+begin_src bash
+db version v4.0.1
+git version: 54f1582fc6eb01de4d4c42f26fc133e623f065fb
+OpenSSL version: OpenSSL 1.1.0h  27 Mar 2018
+allocator: tcmalloc
+modules: none
+build environment:
+distmod: ubuntu1804
+distarch: x86_64
+target_arch: x86_64
+#+end_src
 
-     So long as your version is some variation of =4.0.x= everything
-     will work fine.
+So long as your version is some variation of =4.0.x= everything
+will work fine.
 
 **** Installing the additional packages we need
-     Luckily the remaining packages that we need, we can grab from the
-     Ubuntu repositories since they are the correct version.
+Luckily the remaining packages that we need, we can grab from the
+Ubuntu repositories since they are the correct version.
 
-     #+begin_src bash
-     sudo apt-get install git unzip imagemagick ffmpeg file
-     #+end_src
+#+begin_src bash
+sudo apt-get install git unzip imagemagick ffmpeg file
+#+end_src
 
-     *Please Note:* we will not be downloading or setting up the
-     optional =Sendmail= and =exiftool= packages, if you need help
-     with setting up these packages, and their functionality I
-     recommend asking StephenLynx on IRC in the #lynxchan channel on
-     the Rizon network.
+*Please Note:* we will not be downloading or setting up the
+optional =Sendmail= and =exiftool= packages, if you need help
+with setting up these packages, and their functionality I
+recommend asking StephenLynx on IRC in the #lynxchan channel on
+the Rizon network.
 
 **** Cloning the LynxChan repository and running our first setup
-     Finally we can clone, and setup LynxChan, start by cloning [[https://gitgud.io/LynxChan/LynxChan][this]]
-     repository:
+Finally we can clone, and setup LynxChan, start by cloning [[https://gitgud.io/LynxChan/LynxChan][this]]
+repository:
 
-     #+begin_src bash
-     git clone https://gitgud.io/LynxChan/LynxChan
-     #+end_src
+#+begin_src bash
+git clone https://gitgud.io/LynxChan/LynxChan
+#+end_src
 
-     Afterwards we can enter the directory generated by cloning the
-     repository, we are going to be working in the =aux= directory.
+Afterwards we can enter the directory generated by cloning the
+repository, we are going to be working in the =aux= directory.
 
-     #+begin_src bash
-     cd LynxChan/aux/
-     #+end_src
+#+begin_src bash
+cd LynxChan/aux/
+#+end_src
 
-     Next we install LynxChan, we need to run the =setup.sh= script.
-     #+begin_src bash
-     ./setup.sh
-     #+end_src
+Next we install LynxChan, we need to run the =setup.sh= script.
+#+begin_src bash
+./setup.sh
+#+end_src
 
-     Upon running this script you will be prompted with several yes or
-     no prompts, you can answer =y= to all of the prompts provided. The
-     installation process should take a few minutes.
+Upon running this script you will be prompted with several yes or
+no prompts, you can answer =y= to all of the prompts provided. The
+installation process should take a few minutes.
 
-     In order to be able to LynxChan as a service we are going to have
-     to create a new user by the name of =node=.
+In order to be able to LynxChan as a service we are going to have
+to create a new user by the name of =node=.
 
-     #+begin_src bash
-     sudo adduser node
-     #+end_src
+#+begin_src bash
+sudo adduser node
+#+end_src
 
-     The only mandatory information that you need to fill out for this
-     user is the password, use something secure.
+The only mandatory information that you need to fill out for this
+user is the password, use something secure.
 
-     Now we are going to run =root-setup.sh=, this will softlink
-     LynxChan and allow us to run it by typing =lynxchan=, as well as
-     enabling LynxChan to run as a service.
+Now we are going to run =root-setup.sh=, this will softlink
+LynxChan and allow us to run it by typing =lynxchan=, as well as
+enabling LynxChan to run as a service.
 
-     #+begin_src bash
-     sudo ./root-setup.sh
-     #+end_src
+#+begin_src bash
+sudo ./root-setup.sh
+#+end_src
 
-     You will be given two prompts:
-     #+begin_src bash
-     Do you wish to install the command lynxchan for all users using a soft-link? (y,n)
-     #+end_src
+You will be given two prompts:
+#+begin_src bash
+Do you wish to install the command lynxchan for all users using a soft-link? (y,n)
+#+end_src
 
-     Answer yes, this will allow us to run =lynxchan= as a command
-     from our terminal.
+Answer yes, this will allow us to run =lynxchan= as a command
+from our terminal.
 
-     #+begin_src bash
-     Do you wish to install a init script? Requires install as a command and an
-     user called node on the system to run the engine, so it also must have permissions
-     on the engine files. (systemd, upstart, openrc, blank for none)
-     #+end_src
+#+begin_src bash
+Do you wish to install a init script? Requires install as a command and an
+user called node on the system to run the engine, so it also must have permissions
+on the engine files. (systemd, upstart, openrc, blank for none)
+#+end_src
 
-     For this prompt you should type =systemd=. This will allow us to
-     run LynxChan as a service.
+For this prompt you should type =systemd=. This will allow us to
+run LynxChan as a service.
 
-     *Optional:* You can enable LynxChan to boot on startup by running
-     the following command:
+*Optional:* You can enable LynxChan to boot on startup by running
+the following command:
 
-     #+begin_src bash
-     sudo systemctl enable lynxchan
-     #+end_src
+#+begin_src bash
+sudo systemctl enable lynxchan
+#+end_src
 
-     Finally you can add =node= to be a sudoer, with:
+Finally you can add =node= to be a sudoer, with:
 
-     #+begin_src bash
-     sudo adduser node sudo
-     #+end_src
+#+begin_src bash
+sudo adduser node sudo
+#+end_src
 
-     And reboot your server simply by typing =reboot=.
+And reboot your server simply by typing =reboot=.
 
-     Afterwards, we can SSH into our server as the =node= user by
-     typing:
+Afterwards, we can SSH into our server as the =node= user by
+typing:
 
-     #+begin_src bash
-     ssh node@yourserverip
-     #+end_src
+#+begin_src bash
+ssh node@yourserverip
+#+end_src
 
-     Once you have connected to your server, you simply need to run
-     this command in order to allow you to run the LynxChan service
-     through this user:
+Once you have connected to your server, you simply need to run
+this command in order to allow you to run the LynxChan service
+through this user:
 
-     #+begin_src bash
-     sudo setcap 'cap_net_bind_service=+ep' `which node`
-     #+end_src
+#+begin_src bash
+sudo setcap 'cap_net_bind_service=+ep' `which node`
+#+end_src
 
-     Now you can run all of the LynxChan service commands from your
-     =node= user if you so desire.
+Now you can run all of the LynxChan service commands from your
+=node= user if you so desire.
 
-     For the next steps we will need to SSH back into our root account.
+For the next steps we will need to SSH back into our root account.
 
-     Awesome! If everything was installed properly you can run the
-     =lynxchan= command in your terminal, to which you should see
-     something like this:
+Awesome! If everything was installed properly you can run the
+=lynxchan= command in your terminal, to which you should see
+something like this:
 
-     #+begin_src bash
-     Worker 1 booted at Sat, 26 Oct 2019 05:42:41 GMT
-     #+end_src
+#+begin_src bash
+Worker 1 booted at Sat, 26 Oct 2019 05:42:41 GMT
+#+end_src
 
-     You can now view your imageboard on the IP address of your VPS
-     (trailed with =:8080=) or if you installed it locally you can
-     access it at =localhost:8080=.
+You can now view your imageboard on the IP address of your VPS
+(trailed with =:8080=) or if you installed it locally you can
+access it at =localhost:8080=.
 
-     Terminate the LynxChan script with =ctrl= + =c=.
+Terminate the LynxChan script with =ctrl= + =c=.
 
-     Next we are going to need to generate a Root user for us to
-     customize and change various settings in the administrative control
-     panel. We can generate a user by using this command:
+Next we are going to need to generate a Root user for us to
+customize and change various settings in the administrative control
+panel. We can generate a user by using this command:
 
-     You should change =username= and =password= to values that you
-     plan on using.
-     #+begin_src bash
-     lynxchan -ca -l username -p password -gr 0
-     #+end_src
+You should change =username= and =password= to values that you
+plan on using.
+#+begin_src bash
+lynxchan -ca -l username -p password -gr 0
+#+end_src
 
-     With this command you can login at
-     =http://yoursite.com/login.html=.
+With this command you can login at
+=http://yoursite.com/login.html=.
 
 **** Setting up your sites favicon
-     *Please note:* Changing your sites favicon is extremely annoying
-     if you don't have a background in MongoDB, you can replace the
-     favicon in your LynxChan directory, located at
-     =~/Lynxchan/src/fe/static/favicon.ico=, after successfully
-     replacing this file with the favicon you would like to appear on
-     your site, we can run:
+*Please note:* Changing your sites favicon is extremely annoying
+if you don't have a background in MongoDB, you can replace the
+favicon in your LynxChan directory, located at
+=~/Lynxchan/src/fe/static/favicon.ico=, after successfully
+replacing this file with the favicon you would like to appear on
+your site, we can run:
 
-     #+begin_src bash
-     mongofiles -h localhost -d lynxchan -l path/to/your/favicon.ico put /favicon.ico
-     #+end_src
+#+begin_src bash
+mongofiles -h localhost -d lynxchan -l path/to/your/favicon.ico put /favicon.ico
+#+end_src
 *** NGINX reverse proxy and SSL setup
 **** Installing a stable version of NGINX and Certbot for LetsEncrypt SSL
-     In order to get the latest stable version of NGINX we need to add the
-     NGINX stable repository:
+In order to get the latest stable version of NGINX we need to add the
+NGINX stable repository:
 
-     #+begin_src bash
-     sudo add-apt-repository ppa:nginx/stable
-     sudo apt-get update
-     sudo apt-get install nginx
-     #+end_src
+#+begin_src bash
+sudo add-apt-repository ppa:nginx/stable
+sudo apt-get update
+sudo apt-get install nginx
+#+end_src
 
-     Afterwards, in order to get SSL setup we are going to need to
-     install =certbot= and =python-certbot-nginx= with:
+Afterwards, in order to get SSL setup we are going to need to
+install =certbot= and =python-certbot-nginx= with:
 
-     #+begin_src bash
-     sudo add-apt-repository ppa:certbot/certbot
-     sudo apt-get update
-     sudo apt-get install certbot python-certbot-nginx
-     #+end_src
+#+begin_src bash
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot python-certbot-nginx
+#+end_src
 
 **** Generating some LetsEncrypt certificates for our website
-     LetsEncrypt (i.e. =certbot=) will allow us to generate
-     certificates that will enable SSL for our userbase.
+LetsEncrypt (i.e. =certbot=) will allow us to generate
+certificates that will enable SSL for our userbase.
 
-     We are going to run the following command.
+We are going to run the following command.
 
-     #+begin_src bash
-     sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
-     #+end_src
+#+begin_src bash
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+#+end_src
 
-     You will be given the following prompts:
+You will be given the following prompts:
 
-     #+begin_src bash
-     Saving debug log to /var/log/letsencrypt/letsencrypt.log
-     Plugins selected: Authenticator nginx, Installer nginx
-     Enter email address (used for urgent renewal and security notices) (Enter 'c' to cancel):
-     #+end_src
+#+begin_src bash
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator nginx, Installer nginx
+Enter email address (used for urgent renewal and security notices) (Enter 'c' to cancel):
+#+end_src
 
-     Here you can simply enter your email.
+Here you can simply enter your email.
 
-     #+begin_src bash
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     Please read the Terms of Service at
-     https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
-     agree in order to register with the ACME server at
-     https://acme-v02.api.letsencrypt.org/directory
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     (A)gree/(C)ancel:
-     #+end_src
+#+begin_src bash
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please read the Terms of Service at
+https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
+agree in order to register with the ACME server at
+https://acme-v02.api.letsencrypt.org/directory
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(A)gree/(C)ancel:
+#+end_src
 
-     Enter =A= to agree.
+Enter =A= to agree.
 
-     #+begin_src bash
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     Would you be willing to share your email address with the Electronic Frontier
-     Foundation, a founding partner of the Lets Encrypt project and the non-profit
-     organization that develops Certbot? We'd like to send you email about our work
-     encrypting the web, EFF news, campaigns, and ways to support digital freedom.
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     (Y)es/(N)o:
-     #+end_src
+#+begin_src bash
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Would you be willing to share your email address with the Electronic Frontier
+Foundation, a founding partner of the Lets Encrypt project and the non-profit
+organization that develops Certbot? We'd like to send you email about our work
+encrypting the web, EFF news, campaigns, and ways to support digital freedom.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o:
+#+end_src
 
-     This one is up to your preference. Afterwards, certbot will run a
-     verification, and give you one final prompt.
+This one is up to your preference. Afterwards, certbot will run a
+verification, and give you one final prompt.
 
-     #+begin_src bash
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     1: No redirect - Make no further changes to the webserver configuration.
-     2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
-     new sites, or if you're confident your site works on HTTPS. You can undo this
-     change by editing your web server's configruation.
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     Select the appropriate number [1-2] then [enter] (press 'c' to cancel):
-     #+end_src
+#+begin_src bash
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1: No redirect - Make no further changes to the webserver configuration.
+2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
+new sites, or if you're confident your site works on HTTPS. You can undo this
+change by editing your web server's configruation.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate number [1-2] then [enter] (press 'c' to cancel):
+#+end_src
 
-     I strongly recommend enabling SSL by default with
-     =2=. Afterwards, your certificates should be successfully generated.
+I strongly recommend enabling SSL by default with
+=2=. Afterwards, your certificates should be successfully generated.
 
-     Upon successfully generating our certificates will usually be generated
-     in =/etc/letsencrypt/live/yourdomain.com/=
+Upon successfully generating our certificates will usually be generated
+in =/etc/letsencrypt/live/yourdomain.com/=
 
-     I recommend running:
+I recommend running:
 
-     #+begin_src bash
-     ls /etc/letsencrypt/live/
-     #+end_src
+#+begin_src bash
+ls /etc/letsencrypt/live/
+#+end_src
 
-     To which you should see the output of:
-     #+begin_src bash
-     yoursite.com  README
-     #+end_src
+To which you should see the output of:
+#+begin_src bash
+yoursite.com  README
+#+end_src
 
-     We are going to need to know the exact location name of our
-     LetsEncrypt site directory for the next section.
+We are going to need to know the exact location name of our
+LetsEncrypt site directory for the next section.
 
 **** Configuring our certificates with our NGINX configuration
-     Next we are going setup our NGINX reverse proxy and point to our
-     LetsEncrypt certificates.
+Next we are going setup our NGINX reverse proxy and point to our
+LetsEncrypt certificates.
 
-     We can start by opening our default NGINX configuration file,
-     located at =/etc/nginx/conf.d/default.conf= with our preferred
-     text editor.
+We can start by opening our default NGINX configuration file,
+located at =/etc/nginx/conf.d/default.conf= with our preferred
+text editor.
 
-     You can replace everything with the file with the following
-     configuration:
+You can replace everything with the file with the following
+configuration:
 
-     #+begin_src nginx
+#+begin_src nginx
      server {
      if ($host = www.yourdomain.com) {
      return 301 https://$host$request_uri;
@@ -639,156 +918,196 @@ on 16chan.
      # managed by Certbot
 
      }
-     #+end_src
+#+end_src
 
-     We can test our configuration by running:
+We can test our configuration by running:
 
-     #+begin_src bash
-     service nginx configtest
-     #+end_src
+#+begin_src bash
+service nginx configtest
+#+end_src
 
-     If everything was done correctly you should see:
+If everything was done correctly you should see:
 
-     #+begin_src bash
-     ,* Testing nginx configuration                                           [ OK ]
-     #+end_src
+#+begin_src bash
+,* Testing nginx configuration                                           [ OK ]
+#+end_src
 
-     Now we can start our newly setup NGINX reverse proxy with
+Now we can start our newly setup NGINX reverse proxy with
 
-     #+begin_src bash
-     service nginx start
-     #+end_src
+#+begin_src bash
+service nginx start
+#+end_src
 
-     Now when start up LynxChan by simply typing =lynxchan= in our
-     terminal we can access our site through our domain, and see that
-     it has a green lock indicating that SSL has been configured.
+Now when start up LynxChan by simply typing =lynxchan= in our
+terminal we can access our site through our domain, and see that
+it has a green lock indicating that SSL has been configured.
 
-     Congratulations your LynxChan imageboard is now successfully setup!
+Congratulations your LynxChan imageboard is now successfully setup!
 
 *** Setting user upload size limit
-    From experience with assisting various new administrators, changing
-    the upload =Maximum size for requests (MB)= to values that exceed 8MB
-    may cause users to recieve various errors about their file size
-    uploads.
+From experience with assisting various new administrators, changing
+the upload =Maximum size for requests (MB)= to values that exceed 8MB
+may cause users to recieve various errors about their file size
+uploads.
 
-    This setting can be found at =https://yourdomain.com/globalSettings.js=.
+This setting can be found at =https://yourdomain.com/globalSettings.js=.
 
-    [[https://i.imgur.com/E0fcRfW.png]]
+[[https://i.imgur.com/E0fcRfW.png]]
 
-    In order to properly fix this, we are going to have to set a
-    parameter in our NGINX configuration files.
+In order to properly fix this, we are going to have to set a
+parameter in our NGINX configuration files.
 
-    In =/etc/nginx/conf.d/default.conf=, we need to add the parameter
-    =client_max_body_size 50M= in the =location= block (you can change 50 to whatever value you
-    set in your global settings).
+In =/etc/nginx/conf.d/default.conf=, we need to add the parameter
+=client_max_body_size 50M= in the =location= block (you can change 50 to whatever value you
+set in your global settings).
 
-    It should look something like this:
+It should look something like this:
 
-    #+begin_src bash
-    location / {
-	proxy_pass http://localhost:8080;
-	proxy_set_header Host $host;
-	proxy_set_header X-Forwarded-For $remote_addr;
-	client_max_body_size 50M; #Just add this line (Change the value to match the one in global settings)
-    }
-    #+end_src
+#+begin_src bash
+location / {
+    proxy_pass http://localhost:8080;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+    client_max_body_size 50M; #Just add this line (Change the value to match the one in global settings)
+}
+#+end_src
 
-    Afterwards, we will also need to set the same parameter up in our
-    =/etc/nginx/nginx.conf= file under the =http= block. Just add
-    =client_max_body_size 50M;=, and save your configuration
-    file. Finally, you can restart you NGINX server with =service
-    nginx restart= and you should not experience any warnings
-    regarding file upload sizes.
+Afterwards, we will also need to set the same parameter up in our
+=/etc/nginx/nginx.conf= file under the =http= block. Just add
+=client_max_body_size 50M;=, and save your configuration
+file. Finally, you can restart you NGINX server with =service
+nginx restart= and you should not experience any warnings
+regarding file upload sizes.
 
 *** Additional questions?
 If you have any questions regarding this guide or LynxChan in general
 you can post in [[https://16chan.xyz/meta/res/917.html][this]] thread on 16chan, or you can email me at [[mailto:admin@16chan.xyz][admin@16chan.xyz]].
 
 * Personal Projects
-  :PROPERTIES:
-  :EXPORT_HUGO_SECTION: projects
-  :EXPORT_FILE_NAME: _index
-  :END:
-  These are not all of the projects that I have made, just a few
-  noteworthy ones that I've worked on recently.
-** 16chan-fe                                             :@Personal_Projects:
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: 16chan-fe
-   :EXPORT_DATE: <2019-09-15 Sun>
-   :END:
-   Placeholder
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: projects
+:EXPORT_FILE_NAME: _index
+:END:
+These are not all of the projects that I have made, just a few
+noteworthy ones that I've worked on recently.
+** 16Lynx                                               :@Personal_Projects:
+:PROPERTIES:
+:EXPORT_FILE_NAME: 16Lynx
+:EXPORT_DATE: <2019-12-01 Sun>
+:END:
+*Project Repository:* https://gitgud.io/663/16Lynx
 
-** Project 2                                             :@Personal_Projects:
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: project2
-   :EXPORT_DATE: <2019-10-24 Thu>
-   :END:
-   YAS
+*Live Site:* https://www.16chan.xyz
+
+16Lynx is the offical frontend for both [[https://16chan.xyz/][16chan.xyz]] as well as
+[[https://formerlychucks.com/][formerlychucks.com]], this project was initially a fork of the
+default frontend provided by the LynxChan projected called
+[[https://formerlychucks.com/][PenumbraLynx]]. PenumbraLynx, although extemely functional,
+lightweight, and somewhat feature heavy lacked many of the core
+features that I wanted to provide for my community, as well as
+features that I would consider essentially, such as catalog
+sorting.
+
+*16Lynx features several additions to PenumbraLynx, such as:*
+  - 3 additional themes (Yotsuba, Yotsuba B, and Warosu)
+  - Additional embedding support for BitChute and Invidio.
+  - A default theme built off of the commonly used 'Tomorrow'
+    theme. (This theme is slightly different for Formerly Chuck's as it
+    features more of a Simpsons twist).
+  - An additional file in =~/static/= that acts as a board directory
+    for DashChan which allows for DashChan support.
+  - Announcements, nav, and footer information is globally pulled
+    from template pages making management of said content extremely
+    easy to manage for when new information is to be added.
+  - Catalog sorting options by: bump order, last reply, creation date,
+    and reply count.
+  - Clipboard paste support for several image formats
+  - Several utility features:
+    - reclicking floating menu buttons such as Side Catalog,
+      Settings, and Watching will result in closing the window).
+    - Additonal top and bottom navigation controls on =board.html=,
+      =thread.html=, and =catalog.html=.
+    - Reformatting of =boards.html= and =archive.html=, making
+      these pages significantly more readable and usable.
+
+This project is extremely prolific to me, because along with being
+tangible (in the sense that it can be seen and used) it acts as a
+community for hundreds of daily users. Code that I have written is
+being used by people everyday. Alongside this, I also developed
+several skills that I hadn't had in the past, specifially pertaining
+to web development and collaberation. To list a few:
+- Management of an NGINX server, and maintainence/security/management
+  of a service.
+- Adding hidden service support to a website.
+- Management and setup of analytics platforms (in this case [[https://matomo.org][Matomo]]).
+- Management of several services provided alongside 16chan, such as
+  [[https://imageboard.net/][imageboard.net]], DashChan app support.
+
 * About
-  :PROPERTIES:
-  :EXPORT_HUGO_SECTION: .
-  :EXPORT_FILE_NAME: about
-  :END:
-  *I'm 663*, and this is my blog. This site was created in an attempt to
-  aggregate my personal thoughts, interests, and useful information
-  (such as technical guides).
-  I've gone by many aliases online, the most widely known being 663,
-  the alias that I use as the head administrator and owner of [[https://16chan.xyz/][16chan]].
-  Currently I'm in the final year of my Computer Science program.
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: .
+:EXPORT_FILE_NAME: about
+:END:
+*I'm 663*, and this is my blog. This site was created in an attempt to
+aggregate my personal thoughts, interests, and useful information
+(such as technical guides).
+I've gone by many aliases online, the most widely known being 663,
+the alias that I use as the head administrator and owner of [[https://16chan.xyz/][16chan]].
+Currently I'm in the final year of my Computer Science program.
 
-  If you're interested in getting in contact with me, or would like me
-  to answer any questions regarding content on this site you can send me
-  an email at [[mailto:admin@16chan.xyz][admin@16chan.xyz]].
+If you're interested in getting in contact with me, or would like me
+to answer any questions regarding content on this site you can send me
+an email at [[mailto:admin@16chan.xyz][admin@16chan.xyz]].
 
 ** Useful Links
-   - [[https://github.com/maksrago/im663.com][im663.com source]]
-   - [[https://github.com/olOwOlo/hugo-theme-even][Even (im663 site theme) source]]
+- [[https://github.com/maksrago/im663.com][im663.com source]]
+- [[https://github.com/olOwOlo/hugo-theme-even][Even (im663 site theme) source]]
 
 *** Some of my Sites
-    - [[https://16chan.xyz/][16chan.xyz]]
-    - [[https://imageboard.net/][imageboard.net]]
-    - [[https://kinostream.gq/][kinostream.gq]]
-    - [[https://im663.com/][im663.com]]
+- [[https://16chan.xyz/][16chan.xyz]]
+- [[https://imageboard.net/][imageboard.net]]
+- [[https://kinostream.gq/][kinostream.gq]]
+- [[https://im663.com/][im663.com]]
 
 
-    View more of my projects [[https://github.com/maksrago][here]].
+View more of my projects [[https://github.com/maksrago][here]].
 
 ** Frequently Asked Questions
-   - */Why did you choose 663 as your alias?/*
-   - I was introduced to the film director [[https://en.wikipedia.org/wiki/Wong_Kar-wai][Wong Kar-wai]] and his 1994
-     film /Chunking Express/ which really resonated
-     with me. One of the characters from the film was called "Cop 663"
-     and I really resonated with his character.
+- */Why did you choose 663 as your alias?/*
+- I was introduced to the film director [[https://en.wikipedia.org/wiki/Wong_Kar-wai][Wong Kar-wai]] and his 1994
+  film /Chunking Express/ which really resonated
+  with me. One of the characters from the film was called "Cop 663"
+  and I really resonated with his character.
 
 
-   - */Why did you start [[https://www.16chan.xyz][16chan.xyz]]?/*
-   - I started to get extremely fed up with 4chan's content, I
-     primarily browsed /g/ and /wsg/ at the time, and as time went on
-     more and more low quality content was getting posted. Also,
-     4chan's source code is not readily available, and I can't confirm
-     that it's actually privacy respecting. My issues with 8chan was
-     that anyone could create a board, leading to community
-     fragmentation. I thought that starting a small tight knit
-     imageboard would work better, and I haven't looked back thus far,
-     really happy with 16chan is, and where it's going.
+- */Why did you start [[https://www.16chan.xyz][16chan.xyz]]?/*
+- I started to get extremely fed up with 4chan's content, I
+  primarily browsed /g/ and /wsg/ at the time, and as time went on
+  more and more low quality content was getting posted. Also,
+  4chan's source code is not readily available, and I can't confirm
+  that it's actually privacy respecting. My issues with 8chan was
+  that anyone could create a board, leading to community
+  fragmentation. I thought that starting a small tight knit
+  imageboard would work better, and I haven't looked back thus far,
+  really happy with 16chan is, and where it's going.
 
 
-   - */What are your political beliefs?/*
-   - I currently reside within the United States, and don't feel any
-     affiliation with the Republican or Democratic Parties nor any of
-     the current parties that are available. I am a conservative, in
-     that I believe that less government intervention is usually
-     better, however, I am for the most part very apolitical, and
-     don't care about discussing politics. I am however a huge
-     proponent of free speech and freedom of expression, and as such I
-     happen to run an imageboard centered around said freedoms.
+- */What are your political beliefs?/*
+- I currently reside within the United States, and don't feel any
+  affiliation with the Republican or Democratic Parties nor any of
+  the current parties that are available. I am a conservative, in
+  that I believe that less government intervention is usually
+  better, however, I am for the most part very apolitical, and
+  don't care about discussing politics. I am however a huge
+  proponent of free speech and freedom of expression, and as such I
+  happen to run an imageboard centered around said freedoms.
 
 
-   - */What is your favorite film?/*
-   - I don't think I can name one quintiscential film that I would
-     choose as my all time favorite film, rather I can name a few of
-     my favorites:
-     - /[[https://en.wikipedia.org/wiki/Chungking_Express][Chungking Express]]/ (1994)
-     - /[[https://en.wikipedia.org/wiki/Blind_Chance][Blind Chance]]/ (1987) (or /Przypadek/ in Polish)
-     - /[[https://en.wikipedia.org/wiki/Solaris_(1972_film)][Solaris]]/ (1972)
-     - /[[https://en.wikipedia.org/wiki/The_House_That_Jack_Built_(2018_film)][The House That Jack Built]]/ (2018)
+- */What is your favorite film?/*
+- I don't think I can name one quintiscential film that I would
+  choose as my all time favorite film, rather I can name a few of
+  my favorites:
+  - /[[https://en.wikipedia.org/wiki/Chungking_Express][Chungking Express]]/ (1994)
+  - /[[https://en.wikipedia.org/wiki/Blind_Chance][Blind Chance]]/ (1987) (or /Przypadek/ in Polish)
+  - /[[https://en.wikipedia.org/wiki/Solaris_(1972_film)][Solaris]]/ (1972)
+  - /[[https://en.wikipedia.org/wiki/The_House_That_Jack_Built_(2018_film)][The House That Jack Built]]/ (2018)
