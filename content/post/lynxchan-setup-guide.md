@@ -1,8 +1,7 @@
 +++
 title = "How to setup LynxChan 2.2.x with Ubuntu 18.04"
 date = 2019-11-02T00:00:00-04:00
-tags = ["ubuntu", "nginx", "lynxchan"]
-categories = ["guides"]
+tags = ["guide", "ubuntu", "nginx", "lynxchan"]
 draft = false
 +++
 
@@ -562,7 +561,7 @@ verification, and give you one final prompt.
 1: No redirect - Make no further changes to the webserver configuration.
 2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
 new sites, or if you're confident your site works on HTTPS. You can undo this
-change by editing your web server's configruation.
+change by editing your web server's configuration.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Select the appropriate number [1-2] then [enter] (press 'c' to cancel):
 ```

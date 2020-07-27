@@ -5,7 +5,115 @@
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: post
 :END:
-** How to add app support for LynxChan imageboards (through DashChan) :@guides:lynxchan:ubuntu:
+** The best way to watch Twitch (Chatterino + Streamlink + VLC)     :guide:
+:PROPERTIES:
+:EXPORT_FILE_NAME: best-twitch
+:EXPORT_DATE: <2020-05-28>
+:END:
+As someone who is interested in a variety of different speedrun games,
+and different speedrunners I often find it hard to watch several
+livestreams at the same time. In the past used a tool by the name of
+Livestreamer in order to pipe livestreams into VLC, and have several
+instances of VLC open, however, that left a lot to be desired with the
+chat experience, and the project has since been abandoned. Luckily,
+since then Streamlink has become an active fork of the no longer
+maintained Livestreamer.
+
+Chatterino, an FOSS Twitch chat client enhances this experience
+further with a variety of features, the most important of which,
+direct piping to Streamlink.
+
+My Twitch viewing experience now often looks like this:
+
+https://i.imgur.com/xy30LPr.png
+
+https://i.imgur.com/ajaXMLm.png
+
+This is a guide on how to get the best experience out of Twitch,
+without having to use the bloated Twitch site.
+
+*** Download VLC
+This step is extremely straight forward, out of the box VLC should be
+perfectly configured for your system.
+
+*Download VLC:* https://www.videolan.org/ and download and install the appropriate version
+of VLC for your system.
+
+*** Download Streamlink
+Streamlink, the tool that will pipe Twitch streams to VLC, is a
+command-line tool, and typically would require use of the command
+line, however, we are going to use Chatterino in order to invoke
+stream piping.
+
+*Download Streamlink:*
+  https://github.com/streamlink/streamlink/releases/latest (if you're
+  on Windows select the .exe) Download and install Streamlink.
+
+
+*** Download and configure Chatterino
+Chatterino, will in essence act as our front-end for accessing Twitch,
+it brings along many features that I will recommend enabling after we
+complete the installation process.
+
+*Download Chatterino:* https://chatterino.com/ and install the
+  appropriate version of Chatterino for your system.
+
+We now have all of the essentially components for setting up
+Chatterino. 
+
+First off (although technically optional), we are going to
+need to add a Twitch account, which can be done by clicking on
+settings gear, clicking accounts, and by clicking add. Follow the
+steps on the login page to get a oauth token that you will then paste
+into Chatterino. This can be done for any number of accounts, and you
+can quickly switch between accounts.
+
+**** Afterwards we can setup Streamlink to work alongside Chatterino
+In the settings, under =External Tools=, you should specify what your
+preferred quality for a stream is, typically if you have a good
+connection you can leave it on =Source=.
+
+Finally, for the best experience, under =Additional options=, add the
+following flag =--twitch-low-latency=, this will enable the lowest
+possible experience for watching Twitch
+
+**** Some other very useful settings
+Next in no particular order are some settings that I find to be
+extremely useful (under =General=):
+
+*Interface*
+- =Theme:= -> =Dark=
+
+*Messages*
+- =Alternate background color=
+- =Show deleted messages=
+
+*Emotes*
+- =Animate=
+- =Stack bits=
+
+*Chat title*
+- =Uptime=
+- =Viewer count=
+- =Category=
+- =Title=
+
+*Miscellaneous:*
+- =Show moderation messages=
+- =Bold @usernames=
+- =Show link info when hovering=
+- =Unshorten links=
+
+Finally, you can add a stream by clicking on the =+= button, and typing
+the name of the streamer you'd like to watch, you can have dozens of
+tabs open, meaning that you can easily switch between various
+streams. In order to start the stream, and watch it through VLC, you
+will need to click on the three vertical dots by the name of the
+stream, there you will see =Open in streamlink=, your VLC should open.
+
+You can also enable the minimal interface on VLC, under =View= >
+=Minimal Interface= or by pressing =CTRL + H=.
+** How to add app support for LynxChan imageboards (through DashChan) :@guide:lynxchan:ubuntu:
 :PROPERTIES:
 :EXPORT_FILE_NAME: dashchan-setup-guide
 :EXPORT_DATE: <2019-12-02 Mon>
@@ -243,7 +351,7 @@ addConvertableChanHost("www.16chan.xyz");
 Here you might want to make several modifications depending on the
 your site, and how you configured it.
 
-On line 34 you can specify the amount of attatchments that you want to
+On line 34 you can specify the amount of attachments that you want to
 allow users to post, this should correspond to your site's
 =Maximum number of uploaded files on posting= a setting that is found
 under your site's Global Settings.
@@ -264,7 +372,7 @@ arrow on the top bar:
 https://i.imgur.com/zm6BaBg.png
 
 Afterwards you can restart the DashChan application, if you
-succesfully configured everything you should see the boards that you
+successfully configured everything you should see the boards that you
 specified in your =boardsList.html= file. In my case:
 
 https://i.imgur.com/bO40UeF.png
@@ -284,7 +392,7 @@ or host it on your site. Either way I recommend making a page similar to
 https://16chan.xyz/.static/pages/mobile.html, to make it easy for your
 users to understand how to setup up the application.
 
-** Changes Coming to 16chan :@16chan:16chan:
+** Changes Coming to 16chan :16chan:
 :PROPERTIES:
 :EXPORT_FILE_NAME: 16chan-updates
 :EXPORT_DATE: <2019-11-10 Sun>
@@ -294,7 +402,7 @@ development path. As some of you may or may not know, LynxChan is
 getting an update to version 2.3.0 (we are currently on 2.2.X) and
 with it will come several changes, most of which are targeted at
 updated administrative tools, and ease of use for administrators. That
-being said, I am using this as an oppurtunity to finally hammer out
+being said, I am using this as an opportunity to finally hammer out
 many of the bugs, and changes users have requested. In no particular
 order, these are the changes coming to 16chan:
 
@@ -337,7 +445,7 @@ November/Early December, and I will continue to periodically post
 updates on 16chan's =/meta/= board, and through global announcements
 on 16chan.
 
-** How to setup LynxChan 2.2.x with Ubuntu 18.04 :@guides:ubuntu:nginx:lynxchan:
+** How to setup LynxChan 2.2.x with Ubuntu 18.04 :guide:ubuntu:nginx:lynxchan:
 :PROPERTIES:
 :EXPORT_FILE_NAME: lynxchan-setup-guide
 :EXPORT_DATE: <2019-11-02 Sat>
@@ -852,7 +960,7 @@ verification, and give you one final prompt.
 1: No redirect - Make no further changes to the webserver configuration.
 2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
 new sites, or if you're confident your site works on HTTPS. You can undo this
-change by editing your web server's configruation.
+change by editing your web server's configuration.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Select the appropriate number [1-2] then [enter] (press 'c' to cancel):
 #+end_src
@@ -985,12 +1093,13 @@ you can post in [[https://16chan.xyz/meta/res/917.html][this]] thread on 16chan,
 
 * Personal Projects
 :PROPERTIES:
-:EXPORT_HUGO_SECTION: projects
-:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_SECTION: .
+:EXPORT_FILE_NAME: personal_projects
+:EXPORT_DATE: <2020-07-27 Mon>
 :END:
 These are not all of the projects that I have made, just a few
 noteworthy ones that I've worked on recently.
-** 16Lynx                                               :@Personal_Projects:
+** 16Lynx                                               :projects:
 :PROPERTIES:
 :EXPORT_FILE_NAME: 16Lynx
 :EXPORT_DATE: <2019-12-01 Sun>
@@ -1034,9 +1143,9 @@ This project is extremely prolific to me, because along with being
 tangible (in the sense that it can be seen and used) it acts as a
 community for hundreds of daily users. Code that I have written is
 being used by people everyday. Alongside this, I also developed
-several skills that I hadn't had in the past, specifially pertaining
-to web development and collaberation. To list a few:
-- Management of an NGINX server, and maintainence/security/management
+several skills that I hadn't had in the past, specifically pertaining
+to web development and collaboration. To list a few:
+- Management of an NGINX server, and maintainance/security/management
   of a service.
 - Adding hidden service support to a website.
 - Management and setup of analytics platforms (in this case [[https://matomo.org][Matomo]]).
@@ -1047,6 +1156,7 @@ to web development and collaberation. To list a few:
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: .
 :EXPORT_FILE_NAME: about
+:EXPORT_DATE: <2020-07-27 Mon>
 :END:
 *I'm 663*, and this is my blog. This site was created in an attempt to
 aggregate my personal thoughts, interests, and useful information
@@ -1062,7 +1172,6 @@ an email at [[mailto:admin@16chan.xyz][admin@16chan.xyz]].
 ** Useful Links
 - [[https://github.com/maksrago/im663.com][im663.com source]]
 - [[https://github.com/olOwOlo/hugo-theme-even][Even (im663 site theme) source]]
-
 *** Some of my Sites
 - [[https://16chan.xyz/][16chan.xyz]]
 - [[https://imageboard.net/][imageboard.net]]
@@ -1104,10 +1213,22 @@ View more of my projects [[https://github.com/maksrago][here]].
 
 
 - */What is your favorite film?/*
-- I don't think I can name one quintiscential film that I would
+- I don't think I can name one quintissential film that I would
   choose as my all time favorite film, rather I can name a few of
   my favorites:
-  - /[[https://en.wikipedia.org/wiki/Chungking_Express][Chungking Express]]/ (1994)
-  - /[[https://en.wikipedia.org/wiki/Blind_Chance][Blind Chance]]/ (1987) (or /Przypadek/ in Polish)
-  - /[[https://en.wikipedia.org/wiki/Solaris_(1972_film)][Solaris]]/ (1972)
-  - /[[https://en.wikipedia.org/wiki/The_House_That_Jack_Built_(2018_film)][The House That Jack Built]]/ (2018)
+  - [[https://en.wikipedia.org/wiki/Chungking_Express][Chungking Express]] (1994)
+  - [[https://en.wikipedia.org/wiki/Blind_Chance][Blind Chance]] (1987) (or /Przypadek/ in Polish)
+  - [[https://en.wikipedia.org/wiki/Solaris_(1972_film)][Solaris]] (1972)
+  - [[https://en.wikipedia.org/wiki/The_House_That_Jack_Built_(2018_film)][The House That Jack Built]] (2018)
+* Archives
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: /archives
+:EXPORT_FILE_NAME: _index.md
+:END:
+A placeholder to make sure that Hugo generates a archive page
+* Search
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: /search
+:EXPORT_FILE_NAME: _index.md
+:END:
+A placeholder to make sure that Hugo generates a search page

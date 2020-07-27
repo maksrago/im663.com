@@ -2,7 +2,6 @@
 title = "Changes Coming to 16chan"
 date = 2019-11-10T00:00:00-05:00
 tags = ["16chan"]
-categories = ["16chan"]
 draft = false
 +++
 
@@ -11,7 +10,7 @@ development path. As some of you may or may not know, LynxChan is
 getting an update to version 2.3.0 (we are currently on 2.2.X) and
 with it will come several changes, most of which are targeted at
 updated administrative tools, and ease of use for administrators. That
-being said, I am using this as an oppurtunity to finally hammer out
+being said, I am using this as an opportunity to finally hammer out
 many of the bugs, and changes users have requested. In no particular
 order, these are the changes coming to 16chan:
 

@@ -1,5 +1,6 @@
 +++
 title = "About"
+date = 2020-07-27T00:00:00-04:00
 draft = false
 +++
 
@@ -67,10 +68,10 @@ View more of my projects [here](https://github.com/maksrago).
 <!--listend-->
 
 -   **_What is your favorite film?_**
--   I don't think I can name one quintiscential film that I would
+-   I don't think I can name one quintissential film that I would
     choose as my all time favorite film, rather I can name a few of
     my favorites:
-    -   _[Chungking Express](https://en.wikipedia.org/wiki/Chungking%5FExpress)_ (1994)
-    -   _[Blind Chance](https://en.wikipedia.org/wiki/Blind%5FChance)_ (1987) (or _Przypadek_ in Polish)
-    -   _[Solaris](https://en.wikipedia.org/wiki/Solaris%5F(1972%5Ffilm))_ (1972)
-    -   _[The House That Jack Built](https://en.wikipedia.org/wiki/The%5FHouse%5FThat%5FJack%5FBuilt%5F(2018%5Ffilm))_ (2018)
+    -   [Chungking Express](https://en.wikipedia.org/wiki/Chungking%5FExpress) (1994)
+    -   [Blind Chance](https://en.wikipedia.org/wiki/Blind%5FChance) (1987) (or _Przypadek_ in Polish)
+    -   [Solaris](https://en.wikipedia.org/wiki/Solaris%5F(1972%5Ffilm)) (1972)
+    -   [The House That Jack Built](https://en.wikipedia.org/wiki/The%5FHouse%5FThat%5FJack%5FBuilt%5F(2018%5Ffilm)) (2018)
