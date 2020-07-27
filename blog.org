@@ -5,7 +5,7 @@
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: post
 :END:
-** The best way to watch Twitch (Chatterino + Streamlink + VLC)     :guide:
+** The best way to watch Twitch (Chatterino + Streamlink + VLC)     :@guides:
 :PROPERTIES:
 :EXPORT_FILE_NAME: best-twitch
 :EXPORT_DATE: <2020-05-28>
@@ -113,7 +113,7 @@ stream, there you will see =Open in streamlink=, your VLC should open.
 
 You can also enable the minimal interface on VLC, under =View= >
 =Minimal Interface= or by pressing =CTRL + H=.
-** How to add app support for LynxChan imageboards (through DashChan) :@guide:lynxchan:ubuntu:
+** How to add app support for LynxChan imageboards (through DashChan) :@guides:lynxchan:ubuntu:
 :PROPERTIES:
 :EXPORT_FILE_NAME: dashchan-setup-guide
 :EXPORT_DATE: <2019-12-02 Mon>
@@ -392,7 +392,7 @@ or host it on your site. Either way I recommend making a page similar to
 https://16chan.xyz/.static/pages/mobile.html, to make it easy for your
 users to understand how to setup up the application.
 
-** Changes Coming to 16chan :16chan:
+** Changes Coming to 16chan :@16chan:16chan:
 :PROPERTIES:
 :EXPORT_FILE_NAME: 16chan-updates
 :EXPORT_DATE: <2019-11-10 Sun>
@@ -445,7 +445,7 @@ November/Early December, and I will continue to periodically post
 updates on 16chan's =/meta/= board, and through global announcements
 on 16chan.
 
-** How to setup LynxChan 2.2.x with Ubuntu 18.04 :guide:ubuntu:nginx:lynxchan:
+** How to setup LynxChan 2.2.x with Ubuntu 18.04 :@guides:ubuntu:nginx:lynxchan:
 :PROPERTIES:
 :EXPORT_FILE_NAME: lynxchan-setup-guide
 :EXPORT_DATE: <2019-11-02 Sat>
@@ -1091,7 +1091,7 @@ regarding file upload sizes.
 If you have any questions regarding this guide or LynxChan in general
 you can post in [[https://16chan.xyz/meta/res/917.html][this]] thread on 16chan, or you can email me at [[mailto:admin@16chan.xyz][admin@16chan.xyz]].
 
-* Personal Projects
+* TODO Personal Projects
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: .
 :EXPORT_FILE_NAME: personal_projects
@@ -1099,7 +1099,7 @@ you can post in [[https://16chan.xyz/meta/res/917.html][this]] thread on 16chan,
 :END:
 These are not all of the projects that I have made, just a few
 noteworthy ones that I've worked on recently.
-** 16Lynx                                               :projects:
+** 16Lynx                                               :@Personal_Projects:
 :PROPERTIES:
 :EXPORT_FILE_NAME: 16Lynx
 :EXPORT_DATE: <2019-12-01 Sun>
